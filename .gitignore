@@ -1,1 +1,6 @@
 *.FCStd1
+electronics/sensor-epaper/3d/*
+electronics/sensor-epaper/production/*
+*.kicad_sch-bak
+#*
+
