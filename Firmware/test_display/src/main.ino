@@ -3,6 +3,7 @@
 #include <GxIO/GxIO.h>
 #include <GxIO/GxIO_SPI/GxIO_SPI.h>
 
+#include "FreeMonoBold36.h"
 #include <Fonts/FreeMonoBold12pt7b.h>
 #include <Fonts/FreeMonoBold18pt7b.h>
 #include <Fonts/FreeMonoBold24pt7b.h>
@@ -18,10 +19,8 @@ I2CSoilMoistureSensor sensor;
 #define RST 8
 #define BUSY 10
 
-GxIO_Class io(SPI, /*CS=*/20, /*DC=*/9,
-              /*RST=*/8); // arbitrary selection of 8, 9 selected for default of
-                          // GxEPD_Class
-GxEPD_Class display(io, /*RST=*/8, /*BUSY=*/10); // default selection of (9), 7
+GxIO_Class io(SPI, /*CS=*/20, /*DC=*/9, /*RST=*/8);
+GxEPD_Class display(io, /*RST=*/8, /*BUSY=*/10);
 
 void setup() {
   pinMode(I2C_ENABLE, OUTPUT);
@@ -42,13 +41,13 @@ void drawMsg() {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
 
-  display.setRotation(1);
+  display.setRotation(3);
 
   display.fillScreen(GxEPD_WHITE);
   display.setTextColor(GxEPD_BLACK);
 
   sprintf(msg, "%d", moisture);
-  display.setFont(&FreeMonoBold24pt7b);
+  display.setFont(&FreeMono_Bold36pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   uint16_t x = ((display.width() - tbw) / 2) - tbx;
   uint16_t y = ((display.height() - tbh) / 2) - tby;
@@ -64,7 +63,7 @@ void drawMsg() {
   sprintf(msg, "%.1fC", (float)temperature / 10.0);
   display.setFont(&FreeMonoBold9pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
-  display.setCursor(display.width() - tbw - 1, tbh + 1);
+  display.setCursor(display.width() - tbw - 2, tbh + 1);
   display.print(msg);
 
   display.update();
@@ -72,11 +71,18 @@ void drawMsg() {
 
 void loop() {
   digitalWrite(I2C_ENABLE, LOW);
-  esp_sleep_enable_timer_wakeup(200000);
+  esp_sleep_enable_timer_wakeup(1000000);
   esp_light_sleep_start();
   // delay(100);
-  uint16_t m = sensor.getCapacitance();
-  uint16_t t = sensor.getTemperature();
+  uint8_t averages = 10;
+  uint16_t m = 0, t = 0;
+  for (uint8_t i = 0; i < averages; i++) {
+    m += sensor.getCapacitance();
+    t += sensor.getTemperature();
+  }
+  m = m / averages;
+  t = t / averages;
+
   digitalWrite(I2C_ENABLE, HIGH);
 
   uint32_t b = analogReadMilliVolts(A3) * 2;
