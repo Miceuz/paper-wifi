@@ -10,12 +10,15 @@ Wifi-enabled e-paper display for I2C sensors. Arduino compatible software on Pla
  * Power supply: 2xAA, 3V
  * Screen size: 2.13"
  * Display resolution: 212(H) × 104(V) pixels
- * Connectivity: I2C, UART over USB, UART 
+ * Connectivity: I2C, UART over USB, UART
+ * GPIO: 2 
  * Sleep current: [TODO]
  
 ## Programming instructions
 
 Firmware build and upload process is managed by [Platformio](https://platformio.org). Most probably you will encounter the board in deep sleep in which it is not visible via USB. Jump GPIO9 to GND and reset the board to put it into bootloader mode. Run `pio run -t upload` to compile and upload firmware. Remove jumper and reset the board to run. If deep sleep is not used, board can be programmed without GPIO9 jumper.
+
+![Paper Wifi internals](pics/20221114_130928.jpg)
 
 ![Open source](https://camo.githubusercontent.com/ebb72777ae5276b4e841371e0819913f9d0b6dc194f0c1cf7f852c19f3cbc254/68747470733a2f2f6261646765732e66726170736f66742e636f6d2f6f732f76312f6f70656e2d736f757263652e7376673f763d313032)
 ![Made with KiCad](https://camo.githubusercontent.com/578a4593596fbb4f11a6f20ec5d08cd5f7f80427/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d616465253230776974682532302d4b694361642d626c75652e737667)
