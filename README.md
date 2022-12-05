@@ -2,6 +2,8 @@
 
 ![Paper Wifi](pics/20221114_130836.jpg)
 
+[![](https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-smalls.png)](https://www.tindie.com/products/miceuz/paper-wifi/)
+
 Wifi-enabled e-paper display for I2C sensors. Arduino compatible software on Platformio. 3D printable case.
 
 ## Specifications
