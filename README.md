@@ -8,11 +8,14 @@ Wifi-enabled e-paper display for I2C sensors. Arduino compatible software on Pla
 
  * MCU: ESP32C3
  * Power supply: 2xAA, 3V
+ * Sleep current: 38uA
  * Screen size: 2.13"
  * Display resolution: 212(H) × 104(V) pixels
  * Connectivity: I2C, UART over USB, UART
  * GPIO: 2 
- * Sleep current: [TODO]
+ * Sensors: Temperature, Relative humidity
+ * Temperature accuracy: 0.2°C typical
+ * Relative humidity accuracy: 1.8% typical
  
 ## Programming instructions
 
