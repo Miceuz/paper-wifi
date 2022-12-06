@@ -78,7 +78,7 @@ static void DisplayQrCode(uint8_t at_x, uint8_t at_y, String message) {
 
 void DrawBatteryAndWifiLevel(uint32_t batt_voltage_mv, bool is_wifi_active);
 
-void DisplayWifiInit(String ssid, uint32_t batt_voltage_mv,
+void DisplayWifiInit(const String &ssid, uint32_t batt_voltage_mv,
                      bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
@@ -105,7 +105,8 @@ void DisplayWifiInit(String ssid, uint32_t batt_voltage_mv,
 
 char msg[25];
 
-void DisplayData(SensorReadings sensor_readings, bool is_wifi_active) {
+void DisplayData(const SensorReadings &sensor_readings,
+                 const Settings &settings, bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
 
@@ -129,7 +130,11 @@ void DisplayData(SensorReadings sensor_readings, bool is_wifi_active) {
   // display.setCursor(1, tbh + 1);
   // display.print(msg);
 
-  sprintf(msg, "%.1fC", sensor_readings.temperature);
+  sprintf(msg, "%.1f%s",
+          settings.temperature == Settings::TempFormat::CELSIUS
+              ? sensor_readings.temperature
+              : sensor_readings.temperatureAsFarenheit(),
+          settings.temperature == Settings::TempFormat::CELSIUS ? "C" : "F");
   display.setFont(&FreeMonoBold9pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   display.setCursor(1, tbh + 1);

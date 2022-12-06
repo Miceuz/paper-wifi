@@ -23,9 +23,16 @@ bool mqtt_reconnect() {
   while (!mqtt_client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (mqtt_client.connect(settings.mqtt_device_id.c_str())) {
-      Serial.println("connected");
+    bool is_connected = false;
+    if (settings.mqtt_username && settings.mqtt_password) {
+      is_connected = mqtt_client.connect(settings.mqtt_device_id.c_str(),
+                                         settings.mqtt_username.c_str(),
+                                         settings.mqtt_password.c_str());
     } else {
+      is_connected = mqtt_client.connect(settings.mqtt_device_id.c_str());
+    }
+
+    if (!is_connected) {
       Serial.print("failed, rc=");
       Serial.print(mqtt_client.state());
       if (retries++ > 5) {
@@ -43,9 +50,9 @@ bool mqtt_reconnect() {
 // assignment, thus we create a C string in memory so that PubSubClient could
 // have it
 char mqtt_address[50];
-void MqttSetup(Settings settings) {
+void MqttSetup() {
   strcpy(mqtt_address, settings.mqtt_address.c_str());
-  mqtt_client.setServer(mqtt_address, 1883);
+  mqtt_client.setServer(mqtt_address, settings.mqtt_port);
   mqtt_client.setCallback(mqtt_callback);
 }
 
@@ -55,16 +62,16 @@ bool MqttConnect() {
       return false;
     }
   }
-  // mqtt_client.loop();
+  mqtt_client.loop();
   return true;
 }
 
-void MqttPublish(SensorReadings sensor_readings) {
+void MqttPublish(const SensorReadings &sensor_readings) {
   if (MqttConnect()) {
     char message[256];
     sensor_readings.asJSONString(message);
     Serial.println("Publishing message");
-    mqtt_client.publish("lt.catnip.test", message);
+    mqtt_client.publish(settings.mqtt_topic.c_str(), message);
     mqtt_client.disconnect();
   }
 }

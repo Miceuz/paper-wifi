@@ -8,22 +8,24 @@ const char *temp_radio_str =
     "<input type = 'radio' name = 'temp_format' value = 'F'> Farenheit ";
 WiFiManagerParameter temp_format_param(temp_radio_str);
 
-const char *moist_radio_str =
-    "<br/><label for='moist_format'>Soil moisture reported as:<br/></label>"
-    "<input type = 'radio' name = 'moist_format' value = '%' checked /> "
-    "Percent "
-    "<br/>"
-    "<input type = 'radio' name = 'moist_format' value = 'r'> "
-    "Raw sensor readings<br/>";
-WiFiManagerParameter moist_format_param(moist_radio_str);
-
 const char *mqtt_checkbox_str =
-    "<input type = 'checkbox' name = 'send_mqtt' value = '1' /> "
+    "<input type = 'checkbox' name = 'send_mqtt' value = '1' checked /> "
     "<label for='send_mqtt'>Send readings over MQTT</label><br/>";
 WiFiManagerParameter mqtt_checkbox_param(mqtt_checkbox_str);
 
 WiFiManagerParameter mqtt_broker_address_param("mqtt_broker_address",
                                                "MQTT Broker Address", "", 50);
+
+WiFiManagerParameter mqtt_broker_port_param("mqtt_broker_port",
+                                            "MQTT Broker Port", "1883", 4);
+
+WiFiManagerParameter mqtt_username_param("mqtt_broker_username",
+                                         "MQTT username", "", 20);
+
+WiFiManagerParameter mqtt_password_param("mqtt_broker_password",
+                                         "MQTT password", "", 20);
+
+WiFiManagerParameter mqtt_topic_param("mqtt_topic", "MQTT topic", "", 20);
 
 void saveParamCallback() {
   Serial.println("[CALLBACK] saveParamCallback fired");
@@ -34,16 +36,6 @@ void saveParamCallback() {
       Serial.println("CELSIUS");
     } else {
       settings.temperature = Settings::TempFormat::FARENHEIT;
-    }
-  }
-
-  if (wifi_manager.server->hasArg("moist_format")) {
-    if (wifi_manager.server->arg("moist_format") ==
-        String(static_cast<char>(Settings::MoistFormat::RAW))) {
-      settings.moisture = Settings::MoistFormat::RAW;
-      Serial.println("RAW MOISTURE");
-    } else {
-      settings.moisture = Settings::MoistFormat::PERCENT;
     }
   }
 
@@ -59,6 +51,22 @@ void saveParamCallback() {
   if (wifi_manager.server->hasArg("mqtt_broker_address")) {
     settings.mqtt_address = wifi_manager.server->arg("mqtt_broker_address");
   }
+
+  if (wifi_manager.server->hasArg("mqtt_broker_port")) {
+    settings.mqtt_port = wifi_manager.server->arg("mqtt_broker_port").toInt();
+  }
+
+  if (wifi_manager.server->hasArg("mqtt_broker_username")) {
+    settings.mqtt_username = wifi_manager.server->arg("mqtt_broker_username");
+  }
+
+  if (wifi_manager.server->hasArg("mqtt_broker_password")) {
+    settings.mqtt_password = wifi_manager.server->arg("mqtt_broker_password");
+  }
+
+  if (wifi_manager.server->hasArg("mqtt_topic")) {
+    settings.mqtt_topic = wifi_manager.server->arg("mqtt_topic");
+  }
 }
 
 void WifiConfigSetup() {
@@ -68,9 +76,12 @@ void WifiConfigSetup() {
                                    IPAddress(255, 255, 255, 0));
 
   wifi_manager.addParameter(&temp_format_param);
-  wifi_manager.addParameter(&moist_format_param);
   wifi_manager.addParameter(&mqtt_checkbox_param);
   wifi_manager.addParameter(&mqtt_broker_address_param);
+  wifi_manager.addParameter(&mqtt_broker_port_param);
+  wifi_manager.addParameter(&mqtt_username_param);
+  wifi_manager.addParameter(&mqtt_password_param);
+  wifi_manager.addParameter(&mqtt_topic_param);
   wifi_manager.setSaveParamsCallback(saveParamCallback);
   wifi_manager.setConfigPortalTimeout(120);
 }

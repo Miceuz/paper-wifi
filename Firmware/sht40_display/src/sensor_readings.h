@@ -26,12 +26,14 @@ struct SensorReadings {
            batt_voltage_mv != a.batt_voltage_mv;
   }
 
-  void asJSONString(char *message) {
+  void asJSONString(char *message) const {
     sprintf(message,
             "{\"humidity\": \"%f\", \"temperature\": \"%f\", "
             "\"battery_voltage_mv\":\"%d\"}",
             humidity, temperature, batt_voltage_mv);
   }
+
+  float temperatureAsFarenheit() const { return temperature * 9 / 5 + 32; }
 };
 
 #endif

@@ -36,8 +36,8 @@ void setup() {
   NetworkInit();
 
   if (new_readings != sensor_readings) {
-    DisplayData(new_readings, is_wifi_active);
-    if (is_wifi_active) {
+    DisplayData(new_readings, settings, is_wifi_active);
+    if (is_wifi_active && settings.send_mqtt) {
       MqttPublish(new_readings);
     }
     sensor_readings = new_readings;
@@ -63,7 +63,7 @@ void NetworkInit() {
 
   if (is_wifi_active) {
     settings.mqtt_address = "test.mosquitto.org";
-    MqttSetup(settings);
+    MqttSetup();
   }
 }
 
