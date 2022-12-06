@@ -1,100 +1,134 @@
-#include <GxEPD.h>
-#include <GxGDEW0213T5D/GxGDEW0213T5D.h> // 2.13" b/w 104x212 UC8151D
-#include <GxIO/GxIO.h>
-#include <GxIO/GxIO_SPI/GxIO_SPI.h>
-
-#include "FreeMonoBold36.h"
-#include <Fonts/FreeMonoBold12pt7b.h>
-#include <Fonts/FreeMonoBold18pt7b.h>
-#include <Fonts/FreeMonoBold24pt7b.h>
-#include <Fonts/FreeMonoBold9pt7b.h>
-
+#include "WiFiManager.h"
+#include "display.h"
+#include "mqtt.h"
+#include "sensor_readings.h"
+#include "wifi_config.h"
 #include <I2CSoilMoistureSensor.h>
+#include <Wire.h>
+
+#define I2C_ENABLE 2
+#define SECOND 1000000
+#define MILLI_SECOND 1000
+
+#define DEEP_SLEEP_TIME SECOND * 60 * 5
+#define SENSOR_WARMUP_TIME MILLI_SECOND * 200
 
 I2CSoilMoistureSensor sensor;
-#define I2C_ENABLE 2
+WiFiManager wifi_manager;
 
-#define CS 20
-#define DC 9
-#define RST 8
-#define BUSY 10
+RTC_DATA_ATTR Settings settings;
+RTC_DATA_ATTR SensorReadings sensor_readings;
+RTC_DATA_ATTR bool is_wifi_active = false;
+RTC_DATA_ATTR bool is_first_run = true;
 
-GxIO_Class io(SPI, /*CS=*/20, /*DC=*/9, /*RST=*/8);
-GxEPD_Class display(io, /*RST=*/8, /*BUSY=*/10);
+String wifissidprefix = FPSTR("WIFI_PAPER_");
+String ssid;
 
 void setup() {
+  Serial.begin(9600);
+  Serial.println("Hello");
+
+  SensorsInit();
+  SensorsPowerOn();
+  SensorReadings new_readings = SensorsRead();
+  SensorsPowerOff();
+
+  DisplayInit();
+  NetworkInit();
+
+  if (is_first_run || IsSensorChangeSignificant(new_readings)) {
+    DisplayData(new_readings, settings, is_wifi_active);
+    if (is_wifi_active) {
+      MqttPublish(new_readings);
+    }
+    sensor_readings = new_readings;
+  }
+  is_first_run = false;
+  DeepSleep(DEEP_SLEEP_TIME);
+}
+
+bool IsSensorChangeSignificant(SensorReadings new_readings) {
+  return settings.moisture == Settings::MoistFormat::RAW
+             ? sensor_readings != new_readings
+             : sensor_readings.moistureAsPercent() !=
+                   new_readings.moistureAsPercent();
+}
+
+void NetworkInit() {
+  ssid = wifissidprefix + String(WIFI_getChipId(), HEX);
+
+  if (is_first_run) {
+    Serial.println(ssid);
+    DisplayWifiInit(ssid, sensor_readings.batt_voltage_mv, true);
+    wifi_manager.resetSettings();
+    settings.mqtt_device_id = ssid;
+    WifiConfigSetup();
+  }
+
+  if (is_first_run || is_wifi_active) {
+    is_wifi_active = wifi_manager.autoConnect(ssid.c_str());
+  }
+
+  if (is_wifi_active) {
+    settings.mqtt_address = "test.mosquitto.org";
+    MqttSetup(settings);
+  }
+}
+
+void SensorsInit() {
   pinMode(I2C_ENABLE, OUTPUT);
   digitalWrite(I2C_ENABLE, LOW);
 
   Wire.begin();
-  Wire.setClock(19000);
-  display.init(115200);
+  sensor_readings.batt_voltage_mv = analogReadMilliVolts(A3) * 2;
 }
 
-char msg[25];
-
-RTC_DATA_ATTR uint16_t moisture = 0;
-RTC_DATA_ATTR uint16_t temperature = 0;
-RTC_DATA_ATTR uint32_t batt_voltage_mv = 0;
-
-void drawMsg() {
-  int16_t tbx, tby;
-  uint16_t tbw, tbh;
-
-  display.setRotation(3);
-
-  display.fillScreen(GxEPD_WHITE);
-  display.setTextColor(GxEPD_BLACK);
-
-  sprintf(msg, "%d", moisture);
-  display.setFont(&FreeMono_Bold36pt7b);
-  display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
-  uint16_t x = ((display.width() - tbw) / 2) - tbx;
-  uint16_t y = ((display.height() - tbh) / 2) - tby;
-  display.setCursor(x, y);
-  display.print(msg);
-
-  sprintf(msg, "%.1fV", (float)batt_voltage_mv / 1000.0);
-  display.setFont(&FreeMonoBold9pt7b);
-  display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
-  display.setCursor(1, tbh + 1);
-  display.print(msg);
-
-  sprintf(msg, "%.1fC", (float)temperature / 10.0);
-  display.setFont(&FreeMonoBold9pt7b);
-  display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
-  display.setCursor(display.width() - tbw - 2, tbh + 1);
-  display.print(msg);
-
-  display.update();
-}
-
-void loop() {
+void SensorsPowerOn() {
   digitalWrite(I2C_ENABLE, LOW);
-  esp_sleep_enable_timer_wakeup(1000000);
+  esp_sleep_enable_timer_wakeup(SENSOR_WARMUP_TIME);
   esp_light_sleep_start();
   // delay(100);
-  uint8_t averages = 10;
-  uint16_t m = 0, t = 0;
-  for (uint8_t i = 0; i < averages; i++) {
-    m += sensor.getCapacitance();
-    t += sensor.getTemperature();
+}
+
+SensorReadings SensorsRead() {
+  SensorReadings sensor_readings;
+  sensor_readings.batt_voltage_mv = analogReadMilliVolts(A3) * 2;
+
+  uint8_t averages_m = 0, averages_t = 0;
+  uint16_t m = 0, t = 0, d = 0;
+
+  for (uint8_t i = 0; i < 10; i++) {
+    d = sensor.getCapacitance();
+    if (d != 65535) {
+      m += d;
+      averages_m++;
+    }
+    d = sensor.getTemperature();
+    if (d != 65535) {
+      t += d;
+      averages_t++;
+    }
   }
-  m = m / averages;
-  t = t / averages;
-
-  digitalWrite(I2C_ENABLE, HIGH);
-
-  uint32_t b = analogReadMilliVolts(A3) * 2;
-
-  if (moisture != m) {
-    moisture = m;
-    temperature = t;
-    batt_voltage_mv = b;
-    drawMsg();
-    Serial.println(m);
+  if (averages_m) {
+    sensor_readings.moisture = m / averages_m;
   }
 
-  esp_sleep_enable_timer_wakeup(60000000);
+  if (averages_t) {
+    sensor_readings.temperature = t / averages_t;
+  }
+  Serial.println(String("Moisture: ") + sensor_readings.moisture);
+  Serial.println(String("Temperature: ") + sensor_readings.temperature);
+  Serial.println(String("Moisture percent: ") +
+                 sensor_readings.moistureAsPercent());
+
+  return sensor_readings;
+}
+
+void SensorsPowerOff() { digitalWrite(I2C_ENABLE, HIGH); }
+
+void DeepSleep(uint32_t us) {
+  esp_sleep_enable_timer_wakeup(us);
   esp_deep_sleep_start();
 }
+
+void loop() {}
