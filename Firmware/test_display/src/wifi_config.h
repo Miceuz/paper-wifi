@@ -14,12 +14,9 @@ struct Settings {
   String mqtt_device_id;
   String mqtt_username;
   String mqtt_password;
+  String mqtt_topic;
+  uint16_t mqtt_port = 1883;
 };
-
-extern WiFiManagerParameter temp_format_param;
-extern WiFiManagerParameter moist_format_param;
-extern WiFiManagerParameter mqtt_checkbox_param;
-extern WiFiManagerParameter mqtt_broker_address_param;
 
 extern Settings settings;
 extern WiFiManager wifi_manager;

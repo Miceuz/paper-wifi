@@ -50,9 +50,9 @@ bool mqtt_reconnect() {
 // assignment, thus we create a C string in memory so that PubSubClient could
 // have it
 char mqtt_address[50];
-void MqttSetup(Settings settings) {
+void MqttSetup() {
   strcpy(mqtt_address, settings.mqtt_address.c_str());
-  mqtt_client.setServer(mqtt_address, 1883);
+  mqtt_client.setServer(mqtt_address, settings.mqtt_port);
   mqtt_client.setCallback(mqtt_callback);
 }
 
@@ -66,12 +66,12 @@ bool MqttConnect() {
   return true;
 }
 
-void MqttPublish(SensorReadings sensor_readings) {
+void MqttPublish(const SensorReadings &sensor_readings) {
   if (MqttConnect()) {
     char message[256];
     sensor_readings.asJSONString(message);
     Serial.println("Publishing message");
-    mqtt_client.publish("lt.catnip.test", message);
+    mqtt_client.publish(settings.mqtt_topic.c_str(), message);
     mqtt_client.disconnect();
   }
 }

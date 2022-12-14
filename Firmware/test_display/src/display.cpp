@@ -18,7 +18,6 @@
 
 #include "Arduino.h"
 #include "display.h"
-#include "wifi_config.h"
 #include <stdint.h>
 
 #define CS 20
@@ -39,9 +38,6 @@ void DisplayInit() {
 }
 
 static void DisplayQrCode(uint8_t at_x, uint8_t at_y, String message) {
-  Serial.print("Message length: ");
-  Serial.println(message.length());
-
   QRCode qrcode;
   // See table at https://github.com/ricmoo/QRCode
   // or https://www.qrcode.com/en/about/version.html for
@@ -79,7 +75,7 @@ static void DisplayQrCode(uint8_t at_x, uint8_t at_y, String message) {
 
 void DrawBatteryAndWifiLevel(uint32_t batt_voltage_mv, bool is_wifi_active);
 
-void DisplayWifiInit(String ssid, uint32_t batt_voltage_mv,
+void DisplayWifiInit(const String &ssid, uint32_t batt_voltage_mv,
                      bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
@@ -100,14 +96,14 @@ void DisplayWifiInit(String ssid, uint32_t batt_voltage_mv,
   sprintf(msg, "WiFi SSID: %s", ssid.c_str());
   display.print(msg);
   display.setCursor(50, 90);
-  display.print("WiFi setup will be skipped in 60 seconds.");
+  display.print("WiFi setup will be skipped in 120 seconds.");
   display.update();
 }
 
 char msg[25];
 
-void DisplayData(SensorReadings sensor_readings, Settings settings,
-                 bool is_wifi_active) {
+void DisplayData(const SensorReadings &sensor_readings,
+                 const Settings &settings, const bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
 
@@ -136,7 +132,11 @@ void DisplayData(SensorReadings sensor_readings, Settings settings,
   // display.setCursor(1, tbh + 1);
   // display.print(msg);
 
-  sprintf(msg, "%.1fC", (float)sensor_readings.temperature / 10);
+  sprintf(msg, "%.1f%s",
+          settings.temperature == Settings::TempFormat::CELSIUS
+              ? sensor_readings.temperature
+              : sensor_readings.temperatureAsFarenheit(),
+          settings.temperature == Settings::TempFormat::CELSIUS ? "C" : "F");
   display.setFont(&FreeMonoBold9pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   display.setCursor(1, tbh + 1);
@@ -158,6 +158,8 @@ char ToBatteryLevelSymbol(uint32_t batt_voltage_mv) {
 }
 
 void DrawBatteryAndWifiLevel(uint32_t batt_voltage_mv, bool is_wifi_active) {
+  Serial.println(String("BATT VOLTAGE in DISPLAY:") + batt_voltage_mv);
+  Serial.println(String("SYMBOL:") +ToBatteryLevelSymbol(batt_voltage_mv));
   int16_t tbx, tby;
   uint16_t tbw, tbh;
   sprintf(msg, "%c %c", is_wifi_active ? 'W' : ' ',

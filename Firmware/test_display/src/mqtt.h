@@ -4,6 +4,6 @@
 #include "sensor_readings.h"
 #include "wifi_config.h"
 
-void MqttSetup(Settings settings);
-void MqttPublish(SensorReadings sensor_readings);
+void MqttSetup();
+void MqttPublish(const SensorReadings &sensor_readings);
 #endif

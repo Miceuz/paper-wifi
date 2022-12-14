@@ -106,7 +106,7 @@ void DisplayWifiInit(const String &ssid, uint32_t batt_voltage_mv,
 char msg[25];
 
 void DisplayData(const SensorReadings &sensor_readings,
-                 const Settings &settings, bool is_wifi_active) {
+                 const Settings &settings, const bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
 
@@ -164,17 +164,6 @@ void DrawBatteryAndWifiLevel(uint32_t batt_voltage_mv, bool is_wifi_active) {
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   display.setCursor(display.width() - tbw - 2, tbh + 1);
   display.print(msg);
-}
-
-uint32_t moisture_low = 250, moisture_high = 500;
-uint32_t to_percent(uint32_t moisture) {
-  if (moisture < moisture_low) {
-    return 0;
-  }
-  if (moisture > moisture_high) {
-    return 100;
-  }
-  return (moisture - moisture_low) * 100 / (moisture_high - moisture_low);
 }
 
 void drawBatteryEmpty() {

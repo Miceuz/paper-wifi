@@ -9,7 +9,7 @@ struct SensorReadings {
   const uint32_t moisture_low = 250;
   const uint32_t moisture_high = 532;
 
-  uint32_t temperature;
+  float temperature;
   uint32_t moisture;
   uint32_t batt_voltage_mv;
 
@@ -26,19 +26,19 @@ struct SensorReadings {
   }
 
   bool operator!=(const SensorReadings &a) {
-    return abs((int32_t)temperature - (int32_t)a.temperature) > 10 ||
+    return abs(temperature - a.temperature) > 0.1 ||
            abs((int32_t)moisture - (int32_t)a.moisture) > 1 ||
            abs((int32_t)batt_voltage_mv - (int32_t)a.batt_voltage_mv) > 100;
   }
 
-  void asJSONString(char *message) {
+  void asJSONString(char *message) const {
     sprintf(message,
             "{\"moisture\": \"%f\", \"temperature\": \"%f\", "
-            "\"battery_voltage_mv\":\"%f\"}",
+            "\"battery_voltage_mv\":\"%d\"}",
             moisture, temperature, batt_voltage_mv);
   }
 
-  uint32_t moistureAsPercent() {
+  uint32_t moistureAsPercent() const {
     if (moisture < moisture_low) {
       return 0;
     }
@@ -47,6 +47,8 @@ struct SensorReadings {
     }
     return (moisture - moisture_low) * 100 / (moisture_high - moisture_low);
   }
+
+  float temperatureAsFarenheit() const { return temperature * 9 / 5 + 32; }
 };
 
 #endif

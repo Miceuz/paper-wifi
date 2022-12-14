@@ -10,7 +10,7 @@
 #define SECOND 1000000
 #define MILLI_SECOND 1000
 
-#define DEEP_SLEEP_TIME SECOND * 60 * 5
+#define DEEP_SLEEP_TIME SECOND * 15 
 #define SENSOR_WARMUP_TIME MILLI_SECOND * 200
 
 I2CSoilMoistureSensor sensor;
@@ -21,7 +21,7 @@ RTC_DATA_ATTR SensorReadings sensor_readings;
 RTC_DATA_ATTR bool is_wifi_active = false;
 RTC_DATA_ATTR bool is_first_run = true;
 
-String wifissidprefix = FPSTR("WIFI_PAPER_");
+String wifissidprefix = FPSTR("PAPER_WIFI_");
 String ssid;
 
 void setup() {
@@ -31,6 +31,9 @@ void setup() {
   SensorsInit();
   SensorsPowerOn();
   SensorReadings new_readings = SensorsRead();
+  if(is_first_run) {
+    sensor_readings = new_readings;
+  }
   SensorsPowerOff();
 
   DisplayInit();
@@ -38,7 +41,7 @@ void setup() {
 
   if (is_first_run || IsSensorChangeSignificant(new_readings)) {
     DisplayData(new_readings, settings, is_wifi_active);
-    if (is_wifi_active) {
+    if (is_wifi_active && settings.send_mqtt) {
       MqttPublish(new_readings);
     }
     sensor_readings = new_readings;
@@ -55,8 +58,7 @@ bool IsSensorChangeSignificant(SensorReadings new_readings) {
 }
 
 void NetworkInit() {
-  ssid = wifissidprefix + String(WIFI_getChipId(), HEX);
-
+  ssid = wifissidprefix + String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
   if (is_first_run) {
     Serial.println(ssid);
     DisplayWifiInit(ssid, sensor_readings.batt_voltage_mv, true);
@@ -70,8 +72,7 @@ void NetworkInit() {
   }
 
   if (is_wifi_active) {
-    settings.mqtt_address = "test.mosquitto.org";
-    MqttSetup(settings);
+    MqttSetup();
   }
 }
 
@@ -114,13 +115,14 @@ SensorReadings SensorsRead() {
   }
 
   if (averages_t) {
-    sensor_readings.temperature = t / averages_t;
+    sensor_readings.temperature = (float)(t / averages_t) / 10;
   }
   Serial.println(String("Moisture: ") + sensor_readings.moisture);
   Serial.println(String("Temperature: ") + sensor_readings.temperature);
   Serial.println(String("Moisture percent: ") +
                  sensor_readings.moistureAsPercent());
-
+  Serial.println(String("battery millivolts: ") +
+                 sensor_readings.batt_voltage_mv);
   return sensor_readings;
 }
 
