@@ -1,4 +1,5 @@
 #include "wifi_config.h"
+
 #include "WiFiManager.h"
 
 const char *temp_radio_str =
@@ -23,7 +24,8 @@ const char *mqtt_checkbox_str =
 WiFiManagerParameter mqtt_checkbox_param(mqtt_checkbox_str);
 
 WiFiManagerParameter mqtt_broker_address_param("mqtt_broker_address",
-                                               "MQTT Broker Address", "test.mosquitto.org", 50);
+                                               "MQTT Broker Address",
+                                               "test.mosquitto.org", 50);
 
 WiFiManagerParameter mqtt_broker_port_param("mqtt_broker_port",
                                             "MQTT Broker Port", "1883", 4);
@@ -34,7 +36,8 @@ WiFiManagerParameter mqtt_username_param("mqtt_broker_username",
 WiFiManagerParameter mqtt_password_param("mqtt_broker_password",
                                          "MQTT password", "", 20);
 
-WiFiManagerParameter mqtt_topic_param("mqtt_topic", "MQTT topic", "paper_wifi/test", 20);
+WiFiManagerParameter mqtt_topic_param("mqtt_topic", "MQTT topic",
+                                      "paper_wifi/test", 20);
 
 void saveParamCallback() {
   Serial.println("[CALLBACK] saveParamCallback fired");
@@ -68,7 +71,8 @@ void saveParamCallback() {
   }
 
   if (wifi_manager.server->hasArg("mqtt_broker_address")) {
-    settings.mqtt_address = wifi_manager.server->arg("mqtt_broker_address");
+    wifi_manager.server->arg("mqtt_broker_address")
+        .toCharArray(settings.mqtt_address, 50, 0);
   }
 
   if (wifi_manager.server->hasArg("mqtt_broker_port")) {
@@ -76,15 +80,18 @@ void saveParamCallback() {
   }
 
   if (wifi_manager.server->hasArg("mqtt_broker_username")) {
-    settings.mqtt_username = wifi_manager.server->arg("mqtt_broker_username");
+    wifi_manager.server->arg("mqtt_broker_username")
+        .toCharArray(settings.mqtt_username, 20, 0);
   }
 
   if (wifi_manager.server->hasArg("mqtt_broker_password")) {
-    settings.mqtt_password = wifi_manager.server->arg("mqtt_broker_password");
+    wifi_manager.server->arg("mqtt_broker_password")
+        .toCharArray(settings.mqtt_password, 20, 0);
   }
 
   if (wifi_manager.server->hasArg("mqtt_topic")) {
-    settings.mqtt_topic = wifi_manager.server->arg("mqtt_topic");
+    wifi_manager.server->arg("mqtt_topic")
+        .toCharArray(settings.mqtt_topic, 20, 0);
   }
 }
 

@@ -29,6 +29,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Hello");
 
+  delay(2000);
   SensorsInit();
   SensorsPowerOn();
   SensorReadings new_readings = SensorsRead();
@@ -42,8 +43,13 @@ void setup() {
 
   if (is_first_run || IsSensorChangeSignificant(new_readings)) {
     DisplayData(new_readings, settings, is_wifi_active);
+    Serial.println(String("is_wifi_active:") + is_wifi_active);
+    Serial.println(String("send mqtt:") + settings.send_mqtt);
     if (is_wifi_active && settings.send_mqtt) {
+      MqttSetup();
       MqttPublish(new_readings);
+    } else {
+      Serial.println("No significant sensor change detected");
     }
     sensor_readings = new_readings;
   }
@@ -66,16 +72,12 @@ void NetworkInit() {
     Serial.println(ssid);
     DisplayWifiInit(ssid, sensor_readings.batt_voltage_mv, true);
     wifi_manager.resetSettings();
-    settings.mqtt_device_id = ssid;
+    ssid.toCharArray(settings.mqtt_device_id, 20, 0);
     WifiConfigSetup();
   }
 
   if (is_first_run || is_wifi_active) {
     is_wifi_active = wifi_manager.autoConnect(ssid.c_str());
-  }
-
-  if (is_wifi_active) {
-    MqttSetup();
   }
 }
 
