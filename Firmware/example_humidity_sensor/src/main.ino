@@ -1,9 +1,10 @@
+#include <SensirionI2CSht4x.h>
+
 #include "WiFiManager.h"
 #include "display.h"
 #include "mqtt.h"
 #include "sensor_readings.h"
 #include "wifi_config.h"
-#include <SensirionI2CSht4x.h>
 
 #define I2C_ENABLE 2
 #define SECOND 1000000
@@ -20,7 +21,7 @@ RTC_DATA_ATTR SensorReadings sensor_readings;
 RTC_DATA_ATTR bool is_wifi_active = false;
 RTC_DATA_ATTR bool is_first_run = true;
 
-String wifissidprefix = FPSTR("WIFI_PAPER_");
+String wifissidprefix = FPSTR("PAPER_WIFI_");
 String ssid;
 
 void setup() {
@@ -38,6 +39,7 @@ void setup() {
   if (new_readings != sensor_readings) {
     DisplayData(new_readings, settings, is_wifi_active);
     if (is_wifi_active && settings.send_mqtt) {
+      MqttSetup();
       MqttPublish(new_readings);
     }
     sensor_readings = new_readings;
@@ -47,23 +49,20 @@ void setup() {
 }
 
 void NetworkInit() {
-  ssid = wifissidprefix + String(WIFI_getChipId(), HEX);
+  ssid = wifissidprefix + String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
 
   if (is_first_run) {
     Serial.println(ssid);
     DisplayWifiInit(ssid, sensor_readings.batt_voltage_mv, true);
     wifi_manager.resetSettings();
-    settings.mqtt_device_id = ssid;
+    ssid.toCharArray(settings.mqtt_device_id, 20, 0);
     WifiConfigSetup();
   }
 
   if (is_first_run || is_wifi_active) {
+    WiFi.mode(WIFI_STA);
+    WiFi.mode(WIFI_AP);
     is_wifi_active = wifi_manager.autoConnect(ssid.c_str());
-  }
-
-  if (is_wifi_active) {
-    settings.mqtt_address = "test.mosquitto.org";
-    MqttSetup();
   }
 }
 

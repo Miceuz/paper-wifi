@@ -24,12 +24,12 @@ bool mqtt_reconnect() {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
     bool is_connected = false;
-    if (settings.mqtt_username && settings.mqtt_password) {
-      is_connected = mqtt_client.connect(settings.mqtt_device_id.c_str(),
-                                         settings.mqtt_username.c_str(),
-                                         settings.mqtt_password.c_str());
+    if (strlen(settings.mqtt_username) && strlen(settings.mqtt_password)) {
+      is_connected =
+          mqtt_client.connect(settings.mqtt_device_id, settings.mqtt_username,
+                              settings.mqtt_password);
     } else {
-      is_connected = mqtt_client.connect(settings.mqtt_device_id.c_str());
+      is_connected = mqtt_client.connect(settings.mqtt_device_id);
     }
 
     if (!is_connected) {
@@ -46,13 +46,8 @@ bool mqtt_reconnect() {
   return true;
 }
 
-// PubSubClient is not copying mqtt server address, rather just performs pointer
-// assignment, thus we create a C string in memory so that PubSubClient could
-// have it
-char mqtt_address[50];
 void MqttSetup() {
-  strcpy(mqtt_address, settings.mqtt_address.c_str());
-  mqtt_client.setServer(mqtt_address, settings.mqtt_port);
+  mqtt_client.setServer(settings.mqtt_address, settings.mqtt_port);
   mqtt_client.setCallback(mqtt_callback);
 }
 
@@ -71,7 +66,7 @@ void MqttPublish(const SensorReadings &sensor_readings) {
     char message[256];
     sensor_readings.asJSONString(message);
     Serial.println("Publishing message");
-    mqtt_client.publish(settings.mqtt_topic.c_str(), message);
+    mqtt_client.publish(settings.mqtt_topic, message);
     mqtt_client.disconnect();
   }
 }

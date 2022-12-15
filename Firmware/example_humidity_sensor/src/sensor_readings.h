@@ -28,7 +28,7 @@ struct SensorReadings {
 
   void asJSONString(char *message) const {
     sprintf(message,
-            "{\"humidity\": \"%f\", \"temperature\": \"%f\", "
+            "{\"humidity\": \"%.2f\", \"temperature\": \"%.2f\", "
             "\"battery_voltage_mv\":\"%d\"}",
             humidity, temperature, batt_voltage_mv);
   }
