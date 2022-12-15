@@ -11,7 +11,7 @@
 #define SECOND 1000000
 #define MILLI_SECOND 1000
 
-#define DEEP_SLEEP_TIME SECOND * 15
+#define DEEP_SLEEP_TIME SECOND * 60 * 5
 #define SENSOR_WARMUP_TIME MILLI_SECOND * 200
 
 I2CSoilMoistureSensor sensor;
@@ -29,7 +29,6 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Hello");
 
-  delay(2000);
   SensorsInit();
   SensorsPowerOn();
   SensorReadings new_readings = SensorsRead();
