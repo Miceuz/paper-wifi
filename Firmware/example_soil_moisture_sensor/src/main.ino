@@ -1,16 +1,17 @@
+#include <I2CSoilMoistureSensor.h>
+#include <Wire.h>
+
 #include "WiFiManager.h"
 #include "display.h"
 #include "mqtt.h"
 #include "sensor_readings.h"
 #include "wifi_config.h"
-#include <I2CSoilMoistureSensor.h>
-#include <Wire.h>
 
 #define I2C_ENABLE 2
 #define SECOND 1000000
 #define MILLI_SECOND 1000
 
-#define DEEP_SLEEP_TIME SECOND * 15 
+#define DEEP_SLEEP_TIME SECOND * 15
 #define SENSOR_WARMUP_TIME MILLI_SECOND * 200
 
 I2CSoilMoistureSensor sensor;
@@ -31,7 +32,7 @@ void setup() {
   SensorsInit();
   SensorsPowerOn();
   SensorReadings new_readings = SensorsRead();
-  if(is_first_run) {
+  if (is_first_run) {
     sensor_readings = new_readings;
   }
   SensorsPowerOff();
@@ -60,6 +61,8 @@ bool IsSensorChangeSignificant(SensorReadings new_readings) {
 void NetworkInit() {
   ssid = wifissidprefix + String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
   if (is_first_run) {
+    WiFi.mode(WIFI_STA);
+    WiFi.mode(WIFI_AP);
     Serial.println(ssid);
     DisplayWifiInit(ssid, sensor_readings.batt_voltage_mv, true);
     wifi_manager.resetSettings();
