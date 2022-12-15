@@ -1,6 +1,6 @@
 # Paper-WiFi
 
-![Paper Wifi](pics/20221114_130836.jpg)
+![Paper Wifi](pics/paper_wifi.jpg)
 
 [![](https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-smalls.png)](https://www.tindie.com/products/miceuz/paper-wifi/)
 
@@ -18,12 +18,19 @@ Wifi-enabled e-paper display for I2C sensors. Arduino compatible software on Pla
  * Sensors: Temperature, Relative humidity
  * Temperature accuracy: 0.2°C typical
  * Relative humidity accuracy: 1.8% typical
- 
+
+![](pics/pcb-top.jpg)
+![](pics/pcb-screen.jpg)
+
 ## Programming instructions
 
 Firmware build and upload process is managed by [Platformio](https://platformio.org). Most probably you will encounter the board in deep sleep in which it is not visible via USB. Jump GPIO9 to GND and reset the board to put it into bootloader mode. Run `pio run -t upload` to compile and upload firmware. Remove jumper and reset the board to run. If deep sleep is not used, board can be programmed without GPIO9 jumper.
 
-![Paper Wifi internals](pics/20221114_130928.jpg)
+## Licence
+
+[CERN Open Hardware Licence Version 2 - Strongly Reciprocal](https://ohwr.org/cern_ohl_s_v2.txt)
+
+![Paper Wifi internals](pics/all.jpg)
 
 ![Open source](https://camo.githubusercontent.com/ebb72777ae5276b4e841371e0819913f9d0b6dc194f0c1cf7f852c19f3cbc254/68747470733a2f2f6261646765732e66726170736f66742e636f6d2f6f732f76312f6f70656e2d736f757263652e7376673f763d313032)
 ![Made with KiCad](https://camo.githubusercontent.com/578a4593596fbb4f11a6f20ec5d08cd5f7f80427/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4d616465253230776974682532302d4b694361642d626c75652e737667)
