@@ -1,12 +1,10 @@
+#include "display.h"
+
+// clang-format off
 #include <GxEPD.h>
-#include <GxGDEW0213T5D/GxGDEW0213T5D.h> // 2.13" b/w 104x212 UC8151D
+#include <GxGDEW0213T5D/GxGDEW0213T5D.h>  // 2.13" b/w 104x212 UC8151D
 #include <GxIO/GxIO.h>
 #include <GxIO/GxIO_SPI/GxIO_SPI.h>
-
-#include "FreeMonoBold36.h"
-#include "bitmaps.h"
-#include "qrcode.h"
-#include "symbols.h"
 #include <Fonts/FreeMonoBold12pt7b.h>
 #include <Fonts/FreeMonoBold18pt7b.h>
 #include <Fonts/FreeMonoBold24pt7b.h>
@@ -15,10 +13,15 @@
 #include <Fonts/Picopixel.h>
 #include <Fonts/Tiny3x3a2pt7b.h>
 #include <Fonts/TomThumb.h>
+#include <stdint.h>
 
 #include "Arduino.h"
-#include "display.h"
-#include <stdint.h>
+#include "FreeMonoBold36.h"
+#include "bitmaps.h"
+#include "qrcode.h"
+#include "symbols.h"
+#include "settings.h"
+// clang-format on
 
 #define CS 20
 #define DC 9
@@ -73,16 +76,17 @@ static void DisplayQrCode(uint8_t at_x, uint8_t at_y, String message) {
   }
 }
 
-void DrawBatteryAndWifiLevel(uint32_t batt_voltage_mv, bool is_wifi_active);
+void DrawBatteryAndWifiLevel(const SensorReadings &sensor_readings,
+                             const bool is_wifi_active);
 
-void DisplayWifiInit(const String &ssid, uint32_t batt_voltage_mv,
-                     bool is_wifi_active) {
+void DisplayWifiInit(const String &ssid, const SensorReadings &sensor_readings,
+                     const bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
 
   display.fillScreen(backgroundColor);
 
-  DrawBatteryAndWifiLevel(batt_voltage_mv, is_wifi_active);
+  DrawBatteryAndWifiLevel(sensor_readings, is_wifi_active);
 
   display.drawBitmap(6, (104 - 53) / 2 - 20, epd_bitmap_catnip, 200, 53,
                      foregroundColor);
@@ -103,7 +107,7 @@ void DisplayWifiInit(const String &ssid, uint32_t batt_voltage_mv,
 char msg[25];
 
 void DisplayData(const SensorReadings &sensor_readings,
-                 const Settings &settings, const bool is_wifi_active) {
+                 const bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
 
@@ -112,11 +116,8 @@ void DisplayData(const SensorReadings &sensor_readings,
   display.fillScreen(backgroundColor);
   display.setTextColor(foregroundColor);
 
-  sprintf(msg, "%d%s",
-          settings.moisture == Settings::MoistFormat::PERCENT
-              ? sensor_readings.moistureAsPercent()
-              : sensor_readings.moisture,
-          settings.moisture == Settings::MoistFormat::PERCENT ? "%" : "");
+  sprintf(msg, "%d%c", sensor_readings.moistureAs(settings.moist_format),
+          sensor_readings.moistureUnits(settings.moist_format));
 
   display.setFont(&FreeMono_Bold36pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
@@ -125,18 +126,11 @@ void DisplayData(const SensorReadings &sensor_readings,
   display.setCursor(x, y);
   display.print(msg);
 
-  DrawBatteryAndWifiLevel(sensor_readings.batt_voltage_mv, is_wifi_active);
-  // sprintf(msg, "%.1fV", (float)batt_voltage_mv / 1000.0);
-  // display.setFont(&FreeMonoBold9pt7b);
-  // display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
-  // display.setCursor(1, tbh + 1);
-  // display.print(msg);
+  DrawBatteryAndWifiLevel(sensor_readings, is_wifi_active);
 
-  sprintf(msg, "%.1f%s",
-          settings.temperature == Settings::TempFormat::CELSIUS
-              ? sensor_readings.temperature
-              : sensor_readings.temperatureAsFarenheit(),
-          settings.temperature == Settings::TempFormat::CELSIUS ? "C" : "F");
+  sprintf(msg, "%.1f%s", sensor_readings.temperatureAs(settings.temp_format),
+          sensor_readings.temperatureUnits(settings.temp_format));
+
   display.setFont(&FreeMonoBold9pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   display.setCursor(1, tbh + 1);
@@ -145,25 +139,12 @@ void DisplayData(const SensorReadings &sensor_readings,
   display.update();
 }
 
-char ToBatteryLevelSymbol(uint32_t batt_voltage_mv) {
-  if (batt_voltage_mv > 2750) {
-    return 'A';
-  } else if (batt_voltage_mv > 2500) {
-    return 'B';
-  } else if (batt_voltage_mv > 2250) {
-    return 'C';
-  } else {
-    return 'D';
-  }
-}
-
-void DrawBatteryAndWifiLevel(uint32_t batt_voltage_mv, bool is_wifi_active) {
-  Serial.println(String("BATT VOLTAGE in DISPLAY:") + batt_voltage_mv);
-  Serial.println(String("SYMBOL:") +ToBatteryLevelSymbol(batt_voltage_mv));
+void DrawBatteryAndWifiLevel(const SensorReadings &sensor_readings,
+                             const bool is_wifi_active) {
   int16_t tbx, tby;
   uint16_t tbw, tbh;
   sprintf(msg, "%c %c", is_wifi_active ? 'W' : ' ',
-          ToBatteryLevelSymbol(batt_voltage_mv));
+          sensor_readings.batteryVoltageAsSymbol());
   display.setFont(&symbols);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   display.setCursor(display.width() - tbw - 2, tbh + 1);

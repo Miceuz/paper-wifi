@@ -40,8 +40,8 @@ void setup() {
   DisplayInit();
   NetworkInit();
 
-  if (is_first_run || IsSensorChangeSignificant(new_readings)) {
-    DisplayData(new_readings, settings, is_wifi_active);
+  if (is_first_run || sensor_readings != new_readings) {
+    DisplayData(new_readings, is_wifi_active);
     Serial.println(String("is_wifi_active:") + is_wifi_active);
     Serial.println(String("send mqtt:") + settings.send_mqtt);
     if (is_wifi_active && settings.send_mqtt) {
@@ -56,20 +56,13 @@ void setup() {
   DeepSleep(DEEP_SLEEP_TIME);
 }
 
-bool IsSensorChangeSignificant(SensorReadings new_readings) {
-  return settings.moisture == Settings::MoistFormat::RAW
-             ? sensor_readings != new_readings
-             : sensor_readings.moistureAsPercent() !=
-                   new_readings.moistureAsPercent();
-}
-
 void NetworkInit() {
   ssid = wifissidprefix + String((uint32_t)(ESP.getEfuseMac() >> 16), HEX);
   if (is_first_run) {
     WiFi.mode(WIFI_STA);
     WiFi.mode(WIFI_AP);
     Serial.println(ssid);
-    DisplayWifiInit(ssid, sensor_readings.batt_voltage_mv, true);
+    DisplayWifiInit(ssid, sensor_readings, true);
     wifi_manager.resetSettings();
     ssid.toCharArray(settings.mqtt_device_id, 20, 0);
     WifiConfigSetup();
@@ -121,12 +114,11 @@ SensorReadings SensorsRead() {
   if (averages_t) {
     sensor_readings.temperature = (float)(t / averages_t) / 10;
   }
-  Serial.println(String("Moisture: ") + sensor_readings.moisture);
   Serial.println(String("Temperature: ") + sensor_readings.temperature);
+  Serial.println(String("Moisture raw: ") + sensor_readings.moisture);
   Serial.println(String("Moisture percent: ") +
-                 sensor_readings.moistureAsPercent());
-  Serial.println(String("battery millivolts: ") +
-                 sensor_readings.batt_voltage_mv);
+                 sensor_readings.moistureAs(Settings::MoistFormat::PERCENT));
+  Serial.println(String("Battery mV: ") + sensor_readings.batt_voltage_mv);
   return sensor_readings;
 }
 

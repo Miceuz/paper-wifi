@@ -1,6 +1,7 @@
 #include "wifi_config.h"
 
 #include "WiFiManager.h"
+#include "settings.h"
 
 const char *temp_radio_str =
     "<br/><label for='temp_format'>Temperature format:<br/></label>"
@@ -44,27 +45,25 @@ void saveParamCallback() {
   if (wifi_manager.server->hasArg("temp_format")) {
     if (wifi_manager.server->arg("temp_format") ==
         String(static_cast<char>(Settings::TempFormat::CELSIUS))) {
-      settings.temperature = Settings::TempFormat::CELSIUS;
+      settings.temp_format = Settings::TempFormat::CELSIUS;
       Serial.println("CELSIUS");
     } else {
-      settings.temperature = Settings::TempFormat::FARENHEIT;
+      settings.temp_format = Settings::TempFormat::FARENHEIT;
     }
   }
 
   if (wifi_manager.server->hasArg("moist_format")) {
     if (wifi_manager.server->arg("moist_format") ==
         String(static_cast<char>(Settings::MoistFormat::RAW))) {
-      settings.moisture = Settings::MoistFormat::RAW;
-      Serial.println("RAW MOISTURE");
+      settings.moist_format = Settings::MoistFormat::RAW;
     } else {
-      settings.moisture = Settings::MoistFormat::PERCENT;
+      settings.moist_format = Settings::MoistFormat::PERCENT;
     }
   }
 
   if (wifi_manager.server->hasArg("send_mqtt")) {
     if (wifi_manager.server->arg("send_mqtt") == "1") {
       settings.send_mqtt = true;
-      Serial.println("Send MQTT");
     } else {
       settings.send_mqtt = false;
     }
