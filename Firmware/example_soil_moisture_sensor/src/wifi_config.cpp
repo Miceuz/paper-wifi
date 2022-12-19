@@ -10,6 +10,14 @@ const char *temp_radio_str =
     "<input type = 'radio' name = 'temp_format' value = 'F'> Farenheit ";
 WiFiManagerParameter temp_format_param(temp_radio_str);
 
+const char *primary_reading_radio_str =
+    "<br/><label for='temp_format'>Primary data display:<br/></label>"
+    "<input type = 'radio' name = 'primary_reading' value = 'M' checked /> "
+    "Soil moisture<br/>"
+    "<input type = 'radio' name = 'primary_reading' value = 'T'> Soil "
+    "temperature ";
+WiFiManagerParameter primary_reading_param(primary_reading_radio_str);
+
 const char *moist_radio_str =
     "<br/><label for='moist_format'>Soil moisture reported as:<br/></label>"
     "<input type = 'radio' name = 'moist_format' value = '%' checked /> "
@@ -37,11 +45,18 @@ WiFiManagerParameter mqtt_topic_param("mqtt_topic", "MQTT topic",
 
 void saveParamCallback() {
   Serial.println("[CALLBACK] saveParamCallback fired");
+  if (wifi_manager.server->hasArg("primary_reading")) {
+    if (wifi_manager.server->arg("primary_reading") ==
+        String(static_cast<char>(Settings::PrimaryReading::MOISTURE))) {
+      settings.primary_reading = Settings::PrimaryReading::MOISTURE;
+    } else {
+      settings.primary_reading = Settings::PrimaryReading::TEMPERATURE;
+    }
+  }
   if (wifi_manager.server->hasArg("temp_format")) {
     if (wifi_manager.server->arg("temp_format") ==
         String(static_cast<char>(Settings::TempFormat::CELSIUS))) {
       settings.temp_format = Settings::TempFormat::CELSIUS;
-      Serial.println("CELSIUS");
     } else {
       settings.temp_format = Settings::TempFormat::FARENHEIT;
     }
@@ -87,6 +102,7 @@ void WifiConfigSetup() {
   wifi_manager.setAPStaticIPConfig(IPAddress(4, 3, 2, 1), IPAddress(4, 3, 2, 1),
                                    IPAddress(255, 255, 255, 0));
 
+  wifi_manager.addParameter(&primary_reading_param);
   wifi_manager.addParameter(&temp_format_param);
   wifi_manager.addParameter(&moist_format_param);
   wifi_manager.addParameter(&mqtt_broker_address_param);
@@ -95,5 +111,5 @@ void WifiConfigSetup() {
   wifi_manager.addParameter(&mqtt_password_param);
   wifi_manager.addParameter(&mqtt_topic_param);
   wifi_manager.setSaveParamsCallback(saveParamCallback);
-  wifi_manager.setConfigPortalTimeout(120);
+  wifi_manager.setConfigPortalTimeout(30);
 }

@@ -4,8 +4,10 @@
 struct Settings {
   enum class TempFormat : char { CELSIUS = 'C', FARENHEIT = 'F' };
   enum class MoistFormat : char { RAW = 'r', PERCENT = '%' };
+  enum class PrimaryReading : char { MOISTURE = 'M', TEMPERATURE = 'T' };
   TempFormat temp_format;
   MoistFormat moist_format;
+  PrimaryReading primary_reading;
   char mqtt_address[50];
   char mqtt_device_id[20];
   char mqtt_username[20];

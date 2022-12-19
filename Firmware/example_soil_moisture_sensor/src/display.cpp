@@ -116,8 +116,14 @@ void DisplayData(const SensorReadings &sensor_readings,
   display.fillScreen(backgroundColor);
   display.setTextColor(foregroundColor);
 
-  sprintf(msg, "%d%c", sensor_readings.moistureAs(settings.moist_format),
-          sensor_readings.moistureUnits(settings.moist_format));
+  if (settings.primary_reading == Settings::PrimaryReading::MOISTURE) {
+    sprintf(msg, "%d%c", sensor_readings.moistureAs(settings.moist_format),
+            sensor_readings.moistureUnits(settings.moist_format));
+
+  } else {
+    sprintf(msg, "%.1f%c", sensor_readings.temperatureAs(settings.temp_format),
+            sensor_readings.temperatureUnits(settings.temp_format));
+  }
 
   display.setFont(&FreeMono_Bold36pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
@@ -128,9 +134,13 @@ void DisplayData(const SensorReadings &sensor_readings,
 
   DrawBatteryAndWifiLevel(sensor_readings, is_wifi_active);
 
-  sprintf(msg, "%.1f%c", sensor_readings.temperatureAs(settings.temp_format),
-          sensor_readings.temperatureUnits(settings.temp_format));
-
+  if (settings.primary_reading == Settings::PrimaryReading::MOISTURE) {
+    sprintf(msg, "%.1f%c", sensor_readings.temperatureAs(settings.temp_format),
+            sensor_readings.temperatureUnits(settings.temp_format));
+  } else {
+    sprintf(msg, "%d%c", sensor_readings.moistureAs(settings.moist_format),
+            sensor_readings.moistureUnits(settings.moist_format));
+  }
   display.setFont(&FreeMonoBold9pt7b);
   display.getTextBounds(msg, 0, 0, &tbx, &tby, &tbw, &tbh);
   display.setCursor(1, tbh + 1);

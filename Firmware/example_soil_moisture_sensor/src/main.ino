@@ -28,8 +28,9 @@ String wifissidprefix = FPSTR("PAPER_WIFI_");
 String ssid;
 
 void setup() {
+  delay(3000);
   Serial.begin(9600);
-  Serial.println("Hello");
+  Serial.println(String("Hello, is_first_run:") + is_first_run);
 
   SensorsInit();
   SensorsPowerOn();
@@ -80,6 +81,11 @@ void NetworkInit() {
       connect_retries = 0;
       is_wifi_configured = true;
     } else {
+      if (is_first_run) {
+        settings.moist_format = Settings::MoistFormat::RAW;
+        settings.temp_format = Settings::TempFormat::CELSIUS;
+        settings.primary_reading = Settings::PrimaryReading::MOISTURE;
+      }
       // if we can't connect to WiFi after it has been successfully configured,
       // we give up eventually. Say, device was configured to WiFi hostspot and
       // then brought too far from the router. More logic can be added here,
@@ -90,6 +96,8 @@ void NetworkInit() {
       }
     }
   }
+  Serial.println("Network ocnfig done");
+  delay(1000);
 }
 
 void SensorsInit() {
