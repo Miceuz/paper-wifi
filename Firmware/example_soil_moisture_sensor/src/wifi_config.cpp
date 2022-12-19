@@ -19,11 +19,6 @@ const char *moist_radio_str =
     "Raw sensor readings<br/>";
 WiFiManagerParameter moist_format_param(moist_radio_str);
 
-const char *mqtt_checkbox_str =
-    "<input type = 'checkbox' name = 'send_mqtt' value = '1' checked /> "
-    "<label for='send_mqtt'>Send readings over MQTT</label><br/>";
-WiFiManagerParameter mqtt_checkbox_param(mqtt_checkbox_str);
-
 WiFiManagerParameter mqtt_broker_address_param("mqtt_broker_address",
                                                "MQTT Broker Address",
                                                "test.mosquitto.org", 50);
@@ -61,14 +56,6 @@ void saveParamCallback() {
     }
   }
 
-  if (wifi_manager.server->hasArg("send_mqtt")) {
-    if (wifi_manager.server->arg("send_mqtt") == "1") {
-      settings.send_mqtt = true;
-    } else {
-      settings.send_mqtt = false;
-    }
-  }
-
   if (wifi_manager.server->hasArg("mqtt_broker_address")) {
     wifi_manager.server->arg("mqtt_broker_address")
         .toCharArray(settings.mqtt_address, 50, 0);
@@ -102,7 +89,6 @@ void WifiConfigSetup() {
 
   wifi_manager.addParameter(&temp_format_param);
   wifi_manager.addParameter(&moist_format_param);
-  wifi_manager.addParameter(&mqtt_checkbox_param);
   wifi_manager.addParameter(&mqtt_broker_address_param);
   wifi_manager.addParameter(&mqtt_broker_port_param);
   wifi_manager.addParameter(&mqtt_username_param);

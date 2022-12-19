@@ -19,7 +19,9 @@ WiFiManager wifi_manager;
 
 RTC_DATA_ATTR Settings settings;
 RTC_DATA_ATTR SensorReadings sensor_readings;
-RTC_DATA_ATTR bool is_wifi_active = false;
+RTC_DATA_ATTR bool is_wifi_configured = false;
+RTC_DATA_ATTR bool is_wifi_connected = false;
+RTC_DATA_ATTR uint8_t connect_retries = 0;
 RTC_DATA_ATTR bool is_first_run = true;
 
 String wifissidprefix = FPSTR("PAPER_WIFI_");
@@ -41,14 +43,13 @@ void setup() {
   NetworkInit();
 
   if (is_first_run || sensor_readings != new_readings) {
-    DisplayData(new_readings, is_wifi_active);
-    Serial.println(String("is_wifi_active:") + is_wifi_active);
-    Serial.println(String("send mqtt:") + settings.send_mqtt);
-    if (is_wifi_active && settings.send_mqtt) {
+    DisplayData(new_readings, is_wifi_connected);
+    Serial.println(String("is_wifi_configured:") + is_wifi_connected);
+    if (is_wifi_connected) {
       MqttSetup();
       MqttPublish(new_readings);
     } else {
-      Serial.println("No significant sensor change detected");
+      Serial.println("Wifi not connected");
     }
     sensor_readings = new_readings;
   }
@@ -68,8 +69,26 @@ void NetworkInit() {
     WifiConfigSetup();
   }
 
-  if (is_first_run || is_wifi_active) {
-    is_wifi_active = wifi_manager.autoConnect(ssid.c_str());
+  if (is_wifi_configured) {
+    wifi_manager.setEnableConfigPortal(false);
+  }
+
+  if (is_first_run || is_wifi_configured) {
+    is_wifi_connected = wifi_manager.autoConnect(ssid.c_str());
+
+    if (is_wifi_connected) {
+      connect_retries = 0;
+      is_wifi_configured = true;
+    } else {
+      // if we can't connect to WiFi after it has been successfully configured,
+      // we give up eventually. Say, device was configured to WiFi hostspot and
+      // then brought too far from the router. More logic can be added here,
+      // like a try to recover a known connection or display the connection
+      // screen again, etc
+      if (connect_retries++ > 3) {
+        is_wifi_configured = false;
+      }
+    }
   }
 }
 
