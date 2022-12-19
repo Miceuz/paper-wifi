@@ -128,7 +128,7 @@ void DisplayData(const SensorReadings &sensor_readings,
 
   DrawBatteryAndWifiLevel(sensor_readings, is_wifi_active);
 
-  sprintf(msg, "%.1f%s", sensor_readings.temperatureAs(settings.temp_format),
+  sprintf(msg, "%.1f%c", sensor_readings.temperatureAs(settings.temp_format),
           sensor_readings.temperatureUnits(settings.temp_format));
 
   display.setFont(&FreeMonoBold9pt7b);
