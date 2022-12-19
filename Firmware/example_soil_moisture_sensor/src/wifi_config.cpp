@@ -3,6 +3,8 @@
 #include "WiFiManager.h"
 #include "settings.h"
 
+bool is_params_saved = false;
+
 const char *temp_radio_str =
     "<br/><label for='temp_format'>Temperature format:<br/></label>"
     "<input type = 'radio' name = 'temp_format' value = 'C' checked /> "
@@ -49,8 +51,10 @@ void saveParamCallback() {
     if (wifi_manager.server->arg("primary_reading") ==
         String(static_cast<char>(Settings::PrimaryReading::MOISTURE))) {
       settings.primary_reading = Settings::PrimaryReading::MOISTURE;
+      Serial.println("Primary: MOISTURE");
     } else {
       settings.primary_reading = Settings::PrimaryReading::TEMPERATURE;
+      Serial.println("Primary: TEMPERATURE");
     }
   }
   if (wifi_manager.server->hasArg("temp_format")) {
@@ -94,6 +98,7 @@ void saveParamCallback() {
     wifi_manager.server->arg("mqtt_topic")
         .toCharArray(settings.mqtt_topic, 20, 0);
   }
+  is_params_saved = true;
 }
 
 void WifiConfigSetup() {
@@ -111,5 +116,5 @@ void WifiConfigSetup() {
   wifi_manager.addParameter(&mqtt_password_param);
   wifi_manager.addParameter(&mqtt_topic_param);
   wifi_manager.setSaveParamsCallback(saveParamCallback);
-  wifi_manager.setConfigPortalTimeout(30);
+  wifi_manager.setConfigPortalTimeout(120);
 }

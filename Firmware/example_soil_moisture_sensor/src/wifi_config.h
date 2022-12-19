@@ -6,6 +6,6 @@
 #include "WiFiManager.h"
 
 extern WiFiManager wifi_manager;
-
+extern bool is_params_saved;
 void WifiConfigSetup();
 #endif

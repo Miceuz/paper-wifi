@@ -81,10 +81,8 @@ void NetworkInit() {
       connect_retries = 0;
       is_wifi_configured = true;
     } else {
-      if (is_first_run) {
-        settings.moist_format = Settings::MoistFormat::RAW;
-        settings.temp_format = Settings::TempFormat::CELSIUS;
-        settings.primary_reading = Settings::PrimaryReading::MOISTURE;
+      if (is_first_run && !is_params_saved) {
+        settings.setDefault();
       }
       // if we can't connect to WiFi after it has been successfully configured,
       // we give up eventually. Say, device was configured to WiFi hostspot and

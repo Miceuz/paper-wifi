@@ -14,6 +14,11 @@ struct Settings {
   char mqtt_password[20];
   char mqtt_topic[20];
   uint16_t mqtt_port;
+  void setDefault() {
+    moist_format = MoistFormat::RAW;
+    temp_format = TempFormat::CELSIUS;
+    primary_reading = PrimaryReading::MOISTURE;
+  }
 };
 
 extern Settings settings;
