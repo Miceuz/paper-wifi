@@ -6,9 +6,9 @@
 
 // https://tchapi.github.io/Adafruit-GFX-Font-Customiser/
 
-void DisplayData(const SensorReadings &sensor_readings,
-                 const Settings &settings, const bool is_wifi_active);
 void DisplayInit();
-void DisplayWifiInit(const String &ssid, uint32_t batt_voltage_mv,
-                     bool is_wifi_active);
+void DisplayData(const SensorReadings &sensor_readings,
+                 const bool is_wifi_active);
+void DisplayWifiInit(const String &ssid, const SensorReadings &sensor_readings,
+                     const bool is_wifi_active);
 #endif

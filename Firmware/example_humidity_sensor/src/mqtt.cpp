@@ -2,6 +2,7 @@
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "sensor_readings.h"
+#include "settings.h"
 #include "wifi_config.h"
 
 WiFiClient espClient;

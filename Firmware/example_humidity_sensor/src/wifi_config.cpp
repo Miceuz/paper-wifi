@@ -1,18 +1,24 @@
 #include "wifi_config.h"
 
 #include "WiFiManager.h"
+#include "settings.h"
+
+bool is_params_saved = false;
 
 const char *temp_radio_str =
     "<br/><label for='temp_format'>Temperature format:<br/></label>"
     "<input type = 'radio' name = 'temp_format' value = 'C' checked /> "
     "Celsius<br/>"
-    "<input type = 'radio' name = 'temp_format' value = 'F'> Farenheit ";
+    "<input type = 'radio' name = 'temp_format' value = 'F'> Farenheit<br/>";
 WiFiManagerParameter temp_format_param(temp_radio_str);
 
-const char *mqtt_checkbox_str =
-    "<input type = 'checkbox' name = 'send_mqtt' value = '1' checked /> "
-    "<label for='send_mqtt'>Send readings over MQTT</label><br/>";
-WiFiManagerParameter mqtt_checkbox_param(mqtt_checkbox_str);
+const char *primary_reading_radio_str =
+    "<br/><label for='temp_format'>Primary data display:<br/></label>"
+    "<input type = 'radio' name = 'primary_reading' value = 'M' checked /> "
+    "Humidity<br/>"
+    "<input type = 'radio' name = 'primary_reading' value = 'T'> "
+    "Temperature<br/>";
+WiFiManagerParameter primary_reading_param(primary_reading_radio_str);
 
 WiFiManagerParameter mqtt_broker_address_param("mqtt_broker_address",
                                                "MQTT Broker Address",
@@ -32,22 +38,22 @@ WiFiManagerParameter mqtt_topic_param("mqtt_topic", "MQTT topic",
 
 void saveParamCallback() {
   Serial.println("[CALLBACK] saveParamCallback fired");
+  if (wifi_manager.server->hasArg("primary_reading")) {
+    if (wifi_manager.server->arg("primary_reading") ==
+        String(static_cast<char>(Settings::PrimaryReading::HUMIDITY))) {
+      settings.primary_reading = Settings::PrimaryReading::HUMIDITY;
+      Serial.println("Primary: HUMIDITY");
+    } else {
+      settings.primary_reading = Settings::PrimaryReading::TEMPERATURE;
+      Serial.println("Primary: TEMPERATURE");
+    }
+  }
   if (wifi_manager.server->hasArg("temp_format")) {
     if (wifi_manager.server->arg("temp_format") ==
         String(static_cast<char>(Settings::TempFormat::CELSIUS))) {
-      settings.temperature = Settings::TempFormat::CELSIUS;
-      Serial.println("CELSIUS");
+      settings.temp_format = Settings::TempFormat::CELSIUS;
     } else {
-      settings.temperature = Settings::TempFormat::FARENHEIT;
-    }
-  }
-
-  if (wifi_manager.server->hasArg("send_mqtt")) {
-    if (wifi_manager.server->arg("send_mqtt") == "1") {
-      settings.send_mqtt = true;
-      Serial.println("Send MQTT");
-    } else {
-      settings.send_mqtt = false;
+      settings.temp_format = Settings::TempFormat::FARENHEIT;
     }
   }
 
@@ -74,14 +80,15 @@ void saveParamCallback() {
     wifi_manager.server->arg("mqtt_topic")
         .toCharArray(settings.mqtt_topic, 20, 0);
   }
+  is_params_saved = true;
 }
 
 void WifiConfigSetup() {
   wifi_manager.setAPStaticIPConfig(IPAddress(4, 3, 2, 1), IPAddress(4, 3, 2, 1),
                                    IPAddress(255, 255, 255, 0));
 
+  wifi_manager.addParameter(&primary_reading_param);
   wifi_manager.addParameter(&temp_format_param);
-  wifi_manager.addParameter(&mqtt_checkbox_param);
   wifi_manager.addParameter(&mqtt_broker_address_param);
   wifi_manager.addParameter(&mqtt_broker_port_param);
   wifi_manager.addParameter(&mqtt_username_param);

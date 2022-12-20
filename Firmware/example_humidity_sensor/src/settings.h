@@ -1,0 +1,23 @@
+#ifndef __SETTINGS_H
+#define __SETTINGS_H
+
+struct Settings {
+  enum class TempFormat : char { CELSIUS = 'C', FARENHEIT = 'F' };
+  enum class PrimaryReading : char { HUMIDITY = 'M', TEMPERATURE = 'T' };
+  TempFormat temp_format;
+  PrimaryReading primary_reading;
+  char mqtt_address[50];
+  char mqtt_device_id[20];
+  char mqtt_username[20];
+  char mqtt_password[20];
+  char mqtt_topic[20];
+  uint16_t mqtt_port;
+  void setDefault() {
+    temp_format = TempFormat::CELSIUS;
+    primary_reading = PrimaryReading::HUMIDITY;
+  }
+};
+
+extern Settings settings;
+
+#endif
