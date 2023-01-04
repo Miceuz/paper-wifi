@@ -1,4 +1,4 @@
-(kicad_sch (version 20221110) (generator eeschema)
+(kicad_sch (version 20221206) (generator eeschema)
 
   (uuid bfdbfa5d-af60-4bcb-aaee-563dc6121e2f)
 
@@ -352,7 +352,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a/717c6736-2a95-4424-a35e-11020ba9e52f"
-          (reference "R9") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R9") (unit 1)
         )
       )
     )
@@ -397,7 +397,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a/717c6736-2a95-4424-a35e-11020ba9e52f"
-          (reference "Q2") (unit 1) (value "NX2301P") (footprint "Package_TO_SOT_SMD:SOT-23")
+          (reference "Q2") (unit 1)
         )
       )
     )
@@ -429,7 +429,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a/717c6736-2a95-4424-a35e-11020ba9e52f"
-          (reference "R10") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R10") (unit 1)
         )
       )
     )
@@ -461,7 +461,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a/717c6736-2a95-4424-a35e-11020ba9e52f"
-          (reference "C45") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C45") (unit 1)
         )
       )
     )
@@ -493,7 +493,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a/717c6736-2a95-4424-a35e-11020ba9e52f"
-          (reference "R8") (unit 1) (value "150") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R8") (unit 1)
         )
       )
     )

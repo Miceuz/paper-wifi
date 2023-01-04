@@ -1,13 +1,13 @@
-(kicad_sch (version 20221110) (generator eeschema)
+(kicad_sch (version 20221206) (generator eeschema)
 
   (uuid 8b915f44-d92b-4376-8a4d-f445b50a784a)
 
   (paper "A3")
 
   (title_block
-    (title "Epaper sensor display")
+    (title "Paper WiFi")
     (date "2022-10-27")
-    (rev "1.1.0")
+    (rev "1.2.1")
     (company "Catnip electronics")
     (comment 1 "Albertas Mickėnas")
     (comment 2 "albertas@technarium.lt")
@@ -1735,65 +1735,6 @@
         )
       )
     )
-    (symbol "Regulator_Switching:AP3012" (in_bom yes) (on_board yes)
-      (property "Reference" "U3" (at 0 9.525 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "NCP1421" (at 0 6.985 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm" (at 0.635 -6.35 0)
-        (effects (font (size 1.27 1.27) italic) (justify left) hide)
-      )
-      (property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP3012.pdf" (at 1.27 -12.7 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_keywords" "Step-Up Boost Voltage Regulator" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_description" "500mA, Adjustable Step-Up Voltage Regulator, 1.5MHz Frequency, SOT-23-5" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_fp_filters" "SOT?23*" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "AP3012_0_1"
-        (rectangle (start -7.62 4.445) (end 7.62 -9.525)
-          (stroke (width 0.254) (type default))
-          (fill (type background))
-        )
-      )
-      (symbol "AP3012_1_1"
-        (pin input line (at 10.16 -2.54 180) (length 2.54)
-          (name "FB" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin input line (at -10.16 0 0) (length 2.54)
-          (name "EN" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-        (pin input line (at 10.16 -6.985 180) (length 2.54)
-          (name "REF" (effects (font (size 1.27 1.27))))
-          (number "4" (effects (font (size 1.27 1.27))))
-        )
-        (pin power_in line (at -10.16 2.54 0) (length 2.54)
-          (name "BAT" (effects (font (size 1.27 1.27))))
-          (number "5" (effects (font (size 1.27 1.27))))
-        )
-        (pin power_in line (at 0 -12.065 90) (length 2.54)
-          (name "GND" (effects (font (size 1.27 1.27))))
-          (number "6" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 10.16 2.54 180) (length 2.54)
-          (name "LX" (effects (font (size 1.27 1.27))))
-          (number "7" (effects (font (size 1.27 1.27))))
-        )
-        (pin passive line (at 10.16 0 180) (length 2.54)
-          (name "OUT" (effects (font (size 1.27 1.27))))
-          (number "8" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
     (symbol "Switch:SW_Push" (pin_numbers hide) (pin_names (offset 1.016) hide) (in_bom yes) (on_board yes)
       (property "Reference" "SW" (at 1.27 2.54 0)
         (effects (font (size 1.27 1.27)) (justify left))
@@ -2062,6 +2003,52 @@
         )
       )
     )
+    (symbol "miceuz:TPS61023" (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at -6.35 11.43 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "TPS61023_0_0"
+        (pin input line (at 8.89 -3.81 180) (length 2.54)
+          (name "FB" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+        (pin input line (at -10.16 3.81 0) (length 2.54)
+          (name "EN" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27))))
+        )
+        (pin input line (at -10.16 7.62 0) (length 2.54)
+          (name "VIN" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at 0 -8.89 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "4" (effects (font (size 1.27 1.27))))
+        )
+        (pin output line (at 8.89 7.62 180) (length 2.54)
+          (name "SW" (effects (font (size 1.27 1.27))))
+          (number "5" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_out line (at 8.89 3.81 180) (length 2.54)
+          (name "VOUT" (effects (font (size 1.27 1.27))))
+          (number "6" (effects (font (size 1.27 1.27))))
+        )
+      )
+      (symbol "TPS61023_0_1"
+        (rectangle (start -7.62 10.16) (end 6.35 -6.35)
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+      )
+    )
     (symbol "power:+3V3" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (at 0 -3.81 0)
         (effects (font (size 1.27 1.27)) hide)
@@ -2263,9 +2250,6 @@
   (junction (at 104.14 24.765) (diameter 0) (color 0 0 0 0)
     (uuid 01d20f7e-98d0-4483-8fdc-2af624317853)
   )
-  (junction (at 69.85 59.69) (diameter 0) (color 0 0 0 0)
-    (uuid 02b7a168-d3d3-47c0-bd0b-03791c829bad)
-  )
   (junction (at 369.57 138.43) (diameter 0) (color 0 0 0 0)
     (uuid 0863b861-df8b-4c07-ba22-e8859df76273)
   )
@@ -2290,8 +2274,8 @@
   (junction (at 388.62 245.11) (diameter 0) (color 0 0 0 0)
     (uuid 263d54e8-5766-4355-b945-9a1bb582af0a)
   )
-  (junction (at 119.38 24.765) (diameter 0) (color 0 0 0 0)
-    (uuid 36aa0c06-1c10-4fb8-b1f9-5e27ebb96cd5)
+  (junction (at 125.095 34.29) (diameter 0) (color 0 0 0 0)
+    (uuid 26428a6e-262c-4257-85a4-aa74495a8e8e)
   )
   (junction (at 203.2 112.395) (diameter 0) (color 0 0 0 0)
     (uuid 38f8040c-f260-4f6b-836d-6592bca60916)
@@ -2302,8 +2286,8 @@
   (junction (at 381.635 204.47) (diameter 0) (color 0 0 0 0)
     (uuid 4a7bdc91-036d-4125-a6a0-511c6720c991)
   )
-  (junction (at 174.625 38.1) (diameter 0) (color 0 0 0 0)
-    (uuid 50fdd77a-5078-4457-a083-05824020d2ba)
+  (junction (at 151.13 45.72) (diameter 0) (color 0 0 0 0)
+    (uuid 511ddde7-7ad7-4e5e-9491-ab035c5e7f49)
   )
   (junction (at 351.79 138.43) (diameter 0) (color 0 0 0 0)
     (uuid 535114b1-8d42-4600-a8be-1f4ec232eacb)
@@ -2323,12 +2307,6 @@
   (junction (at 238.125 131.445) (diameter 0) (color 0 0 0 0)
     (uuid 6bac1fd7-e606-4a3e-806b-5adfc5103633)
   )
-  (junction (at 153.67 38.1) (diameter 0) (color 0 0 0 0)
-    (uuid 704a3842-67d5-49f2-b7c5-b49377b3286f)
-  )
-  (junction (at 95.25 24.765) (diameter 0) (color 0 0 0 0)
-    (uuid 76824524-c496-4244-bed2-30296b19cf6b)
-  )
   (junction (at 21.59 59.69) (diameter 0) (color 0 0 0 0)
     (uuid 7c8f46d0-1c27-43f7-8160-4486b049f4d2)
   )
@@ -2344,26 +2322,23 @@
   (junction (at 250.825 163.83) (diameter 0) (color 0 0 0 0)
     (uuid 8b879a29-f82b-479d-b9a2-08af671b4b84)
   )
-  (junction (at 153.67 46.99) (diameter 0) (color 0 0 0 0)
-    (uuid 8c5955f2-8ce8-4988-a368-4ff402069b9b)
-  )
-  (junction (at 163.195 38.1) (diameter 0) (color 0 0 0 0)
-    (uuid 9d5b5424-e912-48df-ac6a-46035f51b3c1)
-  )
   (junction (at 150.495 170.18) (diameter 0) (color 0 0 0 0)
     (uuid 9df7823c-a953-4a1e-8bf4-220546a53335)
   )
-  (junction (at 183.515 38.1) (diameter 0) (color 0 0 0 0)
+  (junction (at 125.095 24.765) (diameter 0) (color 0 0 0 0)
+    (uuid a06833a8-5054-4cde-84e2-f273d73f3f10)
+  )
+  (junction (at 173.355 38.1) (diameter 0) (color 0 0 0 0)
     (uuid a1d15f22-2e58-43c0-af5b-ea6605818640)
+  )
+  (junction (at 151.13 38.1) (diameter 0) (color 0 0 0 0)
+    (uuid a24b664d-4e0a-4b77-84a6-7173a3ceec76)
   )
   (junction (at 218.44 131.445) (diameter 0) (color 0 0 0 0)
     (uuid a3884a8a-9dcd-4dd5-9fed-22b93d1e4a57)
   )
   (junction (at 285.75 217.17) (diameter 1.016) (color 0 0 0 0)
     (uuid a67750b7-31a5-4c88-8235-c05f001a39c2)
-  )
-  (junction (at 153.67 48.26) (diameter 0) (color 0 0 0 0)
-    (uuid a6e47bda-08df-410b-b89a-0cac688ae9db)
   )
   (junction (at 384.81 207.01) (diameter 0) (color 0 0 0 0)
     (uuid acd23a97-06d5-4c95-8959-856603b1eed5)
@@ -2401,6 +2376,9 @@
   (junction (at 153.67 212.09) (diameter 0) (color 0 0 0 0)
     (uuid b936db74-ccec-4ff6-9f61-4c9079a34a36)
   )
+  (junction (at 69.85 59.69) (diameter 0) (color 0 0 0 0)
+    (uuid c25e49a9-b115-4859-a9ae-0a7a653bae50)
+  )
   (junction (at 69.85 24.765) (diameter 0) (color 0 0 0 0)
     (uuid cce7b1c2-fb46-4145-8d6d-d3a2d1d6133c)
   )
@@ -2437,9 +2415,6 @@
   (junction (at 255.27 139.065) (diameter 0) (color 0 0 0 0)
     (uuid f246bbb9-0102-4ebc-ae87-bc23829239f3)
   )
-  (junction (at 111.125 38.1) (diameter 0) (color 0 0 0 0)
-    (uuid f3c0aeca-24d7-4f66-8c21-2bcdcc67a8e1)
-  )
   (junction (at 163.195 217.17) (diameter 0) (color 0 0 0 0)
     (uuid f435c1e7-c84b-49a1-a035-8e30e7e098cf)
   )
@@ -2454,6 +2429,9 @@
   )
   (junction (at 194.31 112.395) (diameter 0) (color 0 0 0 0)
     (uuid f7585052-2384-42b0-88a4-986741081ac9)
+  )
+  (junction (at 164.465 38.1) (diameter 0) (color 0 0 0 0)
+    (uuid fd4ee33a-c043-4ec6-b89d-558dc66a1411)
   )
   (junction (at 375.92 31.115) (diameter 0) (color 0 0 0 0)
     (uuid fda1ad6b-8da9-4e41-8fa8-0f43aab8230a)
@@ -2484,6 +2462,10 @@
   (wire (pts (xy 342.9 138.43) (xy 351.79 138.43))
     (stroke (width 0) (type default))
     (uuid 0fc0619e-c0e3-4e79-b4f6-ffcd6f1f8a3b)
+  )
+  (wire (pts (xy 146.05 24.765) (xy 146.05 34.29))
+    (stroke (width 0) (type default))
+    (uuid 1011226b-bc53-4f81-8d28-af1848a0f1b2)
   )
   (wire (pts (xy 133.985 162.56) (xy 133.985 163.83))
     (stroke (width 0) (type default))
@@ -2516,10 +2498,6 @@
   (wire (pts (xy 172.72 217.17) (xy 180.975 217.17))
     (stroke (width 0) (type default))
     (uuid 1a50964c-1a9e-4f1f-bb45-6dc69115769f)
-  )
-  (wire (pts (xy 139.7 38.1) (xy 153.67 38.1))
-    (stroke (width 0) (type default))
-    (uuid 1a7bc8ff-3ed0-4735-a935-282edca6c468)
   )
   (wire (pts (xy 212.725 149.86) (xy 215.265 149.86))
     (stroke (width 0) (type default))
@@ -2563,10 +2541,6 @@
     (uuid 2518edf5-f851-4713-83f3-747da1bc2f9e)
   )
 
-  (wire (pts (xy 139.7 40.64) (xy 149.86 40.64))
-    (stroke (width 0) (type default))
-    (uuid 2610a150-4b8b-4dcb-afb4-1215ed83c48e)
-  )
   (wire (pts (xy 384.81 225.425) (xy 384.81 207.01))
     (stroke (width 0) (type default))
     (uuid 27876840-3b50-41ba-9fb0-02b29207a788)
@@ -2599,10 +2573,6 @@
     (stroke (width 0) (type default))
     (uuid 2bd27b8e-7b84-4aee-943a-b345f0de690b)
   )
-  (wire (pts (xy 163.195 45.72) (xy 163.195 48.26))
-    (stroke (width 0) (type default))
-    (uuid 2cd37f99-801c-453e-97ab-4e79daec0f53)
-  )
   (polyline (pts (xy 402.59 17.145) (xy 402.59 66.675))
     (stroke (width 0) (type default))
     (uuid 2f4b5a54-2d54-48f8-96f4-a67c764335e0)
@@ -2620,10 +2590,6 @@
     (stroke (width 0) (type default))
     (uuid 3198ce0c-8b4e-4190-b8fa-ebf9931ae4f6)
   )
-  (wire (pts (xy 153.67 48.26) (xy 153.67 49.53))
-    (stroke (width 0) (type default))
-    (uuid 324046e8-8728-4681-be58-4bcdc5812239)
-  )
   (wire (pts (xy 355.6 38.735) (xy 360.68 38.735))
     (stroke (width 0) (type default))
     (uuid 32ae8827-2f17-413a-9bd4-c6600c0e671d)
@@ -2640,6 +2606,10 @@
     (stroke (width 0) (type default))
     (uuid 35024e13-3b6e-45d6-bf04-2484ccb84e3a)
   )
+  (wire (pts (xy 125.095 24.765) (xy 132.715 24.765))
+    (stroke (width 0) (type default))
+    (uuid 355f39a2-a994-4491-b79d-68c2c89cf88f)
+  )
   (wire (pts (xy 387.35 113.03) (xy 396.24 113.03))
     (stroke (width 0) (type default))
     (uuid 35a5df58-cd8d-40b6-b3e6-c586025916b0)
@@ -2648,7 +2618,7 @@
     (stroke (width 0) (type default))
     (uuid 36e9e412-9a8c-493d-938e-add659e37628)
   )
-  (wire (pts (xy 174.625 38.1) (xy 183.515 38.1))
+  (wire (pts (xy 164.465 38.1) (xy 173.355 38.1))
     (stroke (width 0) (type default))
     (uuid 3ae2d87d-8d31-4627-b3d6-855b80f690d2)
   )
@@ -2692,6 +2662,10 @@
     (stroke (width 0) (type default))
     (uuid 485f9916-a5e8-403e-adea-5996dc9f1d42)
   )
+  (wire (pts (xy 140.335 24.765) (xy 146.05 24.765))
+    (stroke (width 0) (type default))
+    (uuid 4975c998-3571-45e8-a58c-2fea323259f7)
+  )
   (wire (pts (xy 215.265 131.445) (xy 218.44 131.445))
     (stroke (width 0) (type default))
     (uuid 4989c10e-d4bf-4dac-b6ba-7a9c0226fc28)
@@ -2700,10 +2674,6 @@
     (stroke (width 0) (type default))
     (uuid 4c644e07-222c-41bd-a81d-50427ab4499d)
   )
-  (wire (pts (xy 149.86 46.99) (xy 153.67 46.99))
-    (stroke (width 0) (type default))
-    (uuid 4d5d5029-209d-48e9-a158-f1f1d2d48a7a)
-  )
   (wire (pts (xy 256.54 200.66) (xy 256.54 209.55))
     (stroke (width 0) (type default))
     (uuid 4e1f6629-ad4f-4b4e-b1ed-3c3f5bf70d6f)
@@ -2711,10 +2681,6 @@
   (wire (pts (xy 210.185 112.395) (xy 210.185 149.86))
     (stroke (width 0) (type default))
     (uuid 4edb7b23-be0f-4ff0-b63a-9999eb6e1fcd)
-  )
-  (wire (pts (xy 153.67 45.72) (xy 153.67 46.99))
-    (stroke (width 0) (type default))
-    (uuid 4f437f27-ba1c-45ae-ac82-6d95777b3d95)
   )
   (wire (pts (xy 256.54 209.55) (xy 278.13 209.55))
     (stroke (width 0) (type default))
@@ -2743,10 +2709,6 @@
   (wire (pts (xy 194.31 112.395) (xy 198.12 112.395))
     (stroke (width 0) (type default))
     (uuid 59089ed9-0e02-4925-b48d-81fa566c6f99)
-  )
-  (wire (pts (xy 111.125 38.1) (xy 119.38 38.1))
-    (stroke (width 0) (type default))
-    (uuid 5964d96e-45d8-4ada-9fdb-06ddea22df12)
   )
   (wire (pts (xy 328.93 90.17) (xy 332.74 90.17))
     (stroke (width 0) (type default))
@@ -2780,7 +2742,7 @@
     (stroke (width 0) (type default))
     (uuid 67f68b62-4146-4af2-8336-e5a7fb5c6be7)
   )
-  (wire (pts (xy 113.03 24.765) (xy 119.38 24.765))
+  (wire (pts (xy 113.03 24.765) (xy 125.095 24.765))
     (stroke (width 0) (type default))
     (uuid 69164cb5-6c71-4b9b-a8cf-a6eef780c997)
   )
@@ -2788,17 +2750,9 @@
     (stroke (width 0) (type default))
     (uuid 6df39078-a170-4ad3-af2a-5645776941d6)
   )
-  (wire (pts (xy 95.25 38.1) (xy 111.125 38.1))
-    (stroke (width 0) (type default))
-    (uuid 7017b7ed-4ee1-4155-9624-1c4a3d4a09e2)
-  )
-  (wire (pts (xy 95.25 24.765) (xy 104.14 24.765))
+  (wire (pts (xy 83.185 24.765) (xy 104.14 24.765))
     (stroke (width 0) (type default))
     (uuid 701a71c7-279f-4f30-bcc6-18e250a0d290)
-  )
-  (wire (pts (xy 132.715 24.765) (xy 144.145 24.765))
-    (stroke (width 0) (type default))
-    (uuid 71511623-891f-4273-a379-5d1c9ba27d5c)
   )
   (wire (pts (xy 378.46 128.27) (xy 378.46 130.81))
     (stroke (width 0) (type default))
@@ -2811,10 +2765,6 @@
   (wire (pts (xy 262.89 163.83) (xy 267.335 163.83))
     (stroke (width 0) (type default))
     (uuid 796fa6a6-1488-4b7f-a07d-389d5a8cd15f)
-  )
-  (wire (pts (xy 144.145 35.56) (xy 139.7 35.56))
-    (stroke (width 0) (type default))
-    (uuid 79fcaf0b-e7ca-4084-a66d-c6d0295fe8ff)
   )
   (wire (pts (xy 314.96 198.12) (xy 314.96 201.93))
     (stroke (width 0) (type default))
@@ -2840,6 +2790,10 @@
     (stroke (width 0) (type default))
     (uuid 842bfd4e-98d3-4aaf-8737-18b68f51d829)
   )
+  (wire (pts (xy 125.095 34.29) (xy 127 34.29))
+    (stroke (width 0) (type default))
+    (uuid 84e7999a-98e7-40e2-b338-9fb69090edb4)
+  )
   (wire (pts (xy 375.92 38.735) (xy 383.54 38.735))
     (stroke (width 0) (type default))
     (uuid 8937e689-04e5-4643-b08a-4375a31912e7)
@@ -2864,10 +2818,6 @@
     (stroke (width 0) (type solid))
     (uuid 920c0752-d316-496f-b74c-2102fc101780)
   )
-  (wire (pts (xy 153.67 38.1) (xy 163.195 38.1))
-    (stroke (width 0) (type default))
-    (uuid 93952885-4888-42d9-879d-e093a64526ec)
-  )
   (wire (pts (xy 247.65 204.47) (xy 247.65 218.44))
     (stroke (width 0) (type default))
     (uuid 93c539f4-3ec1-4800-bd6d-802a2b828873)
@@ -2889,6 +2839,10 @@
     (stroke (width 0) (type default))
     (uuid 972fc5cc-305e-4c02-a1a3-853a8e3a34ff)
   )
+  (wire (pts (xy 146.05 38.1) (xy 151.13 38.1))
+    (stroke (width 0) (type default))
+    (uuid 98af5142-48d2-4dfe-9d7d-fe08c1113b5b)
+  )
   (wire (pts (xy 386.08 130.81) (xy 396.24 130.81))
     (stroke (width 0) (type default))
     (uuid 98f70cfd-4b8b-4783-9336-dfd7e64cb4ed)
@@ -2896,10 +2850,6 @@
   (wire (pts (xy 328.93 80.01) (xy 328.93 82.55))
     (stroke (width 0) (type default))
     (uuid 9ac2f80a-e71c-4bd6-815c-57e4341e51ec)
-  )
-  (wire (pts (xy 163.195 48.26) (xy 153.67 48.26))
-    (stroke (width 0) (type default))
-    (uuid 9b8b6820-c6c9-46f7-8944-61d0ff6b398d)
   )
   (wire (pts (xy 384.81 207.01) (xy 395.605 207.01))
     (stroke (width 0) (type default))
@@ -2921,10 +2871,6 @@
     (stroke (width 0) (type default))
     (uuid 9fd25d25-e9bc-4790-a1ba-16338bb7a13a)
   )
-  (wire (pts (xy 119.38 24.765) (xy 125.095 24.765))
-    (stroke (width 0) (type default))
-    (uuid a38d4885-764e-4469-a8c4-af72e095c268)
-  )
   (wire (pts (xy 381.635 204.47) (xy 395.605 204.47))
     (stroke (width 0) (type default))
     (uuid a4355629-9e54-48fe-94d9-5e2596f9966d)
@@ -2945,9 +2891,9 @@
     (stroke (width 0) (type default))
     (uuid a752cef6-a75c-4f34-be07-ee0735a97291)
   )
-  (wire (pts (xy 83.185 24.765) (xy 95.25 24.765))
+  (wire (pts (xy 127 38.1) (xy 125.095 38.1))
     (stroke (width 0) (type default))
-    (uuid a9ed032c-ff2f-49cb-a6ad-fec392997b14)
+    (uuid a9453840-e9ec-4bde-860d-428b9a28d7aa)
   )
   (wire (pts (xy 149.225 214.63) (xy 149.225 226.695))
     (stroke (width 0) (type default))
@@ -2985,10 +2931,6 @@
     (stroke (width 0) (type default))
     (uuid b2fe5ec3-36e4-4de9-8f9f-27c28068d90f)
   )
-  (wire (pts (xy 149.86 40.64) (xy 149.86 46.99))
-    (stroke (width 0) (type default))
-    (uuid b350c24a-08a4-4ee2-96db-dbc836daa89a)
-  )
   (wire (pts (xy 323.85 201.93) (xy 314.96 201.93))
     (stroke (width 0) (type default))
     (uuid b4eb4791-6997-4d90-aedb-28c241635000)
@@ -3017,13 +2959,9 @@
     (stroke (width 0) (type default))
     (uuid b94fb053-8b83-4841-a08a-085294731355)
   )
-  (wire (pts (xy 153.67 46.99) (xy 153.67 48.26))
+  (wire (pts (xy 151.13 45.72) (xy 153.035 45.72))
     (stroke (width 0) (type default))
-    (uuid bef23582-97d3-4848-b52c-3cde3a4ceb1a)
-  )
-  (wire (pts (xy 144.145 24.765) (xy 144.145 35.56))
-    (stroke (width 0) (type default))
-    (uuid bf17098d-24e2-447d-be05-24eea960560c)
+    (uuid bf4eb6e1-4220-4821-8101-76451472a2bd)
   )
   (wire (pts (xy 206.375 149.86) (xy 206.375 112.395))
     (stroke (width 0) (type default))
@@ -3032,10 +2970,6 @@
   (wire (pts (xy 372.11 38.735) (xy 375.92 38.735))
     (stroke (width 0) (type default))
     (uuid c0d7e830-28b1-4fea-a362-a662d2804792)
-  )
-  (wire (pts (xy 163.195 38.1) (xy 174.625 38.1))
-    (stroke (width 0) (type default))
-    (uuid c12c8668-b47e-4447-9fff-6a98c09fe9b9)
   )
   (wire (pts (xy 274.955 163.83) (xy 279.4 163.83))
     (stroke (width 0) (type default))
@@ -3093,17 +3027,17 @@
     (stroke (width 0) (type default))
     (uuid cedc2d7a-d4a3-49d3-92a4-d5c288824647)
   )
-  (wire (pts (xy 119.38 24.765) (xy 119.38 35.56))
-    (stroke (width 0) (type default))
-    (uuid cfc360a9-b8ba-4ada-aef3-64a691e477be)
-  )
   (wire (pts (xy 261.62 241.3) (xy 276.86 241.3))
     (stroke (width 0) (type default))
     (uuid d08d9d1a-16a1-40c7-b842-2480e137097a)
   )
-  (wire (pts (xy 95.25 32.385) (xy 95.25 38.1))
+  (wire (pts (xy 151.13 38.1) (xy 164.465 38.1))
     (stroke (width 0) (type default))
-    (uuid d9dc68c8-18a3-492c-81ff-cb70a1d7a843)
+    (uuid d09b9b20-7b01-41c9-ae01-cbfc4a611a6c)
+  )
+  (wire (pts (xy 146.05 45.72) (xy 151.13 45.72))
+    (stroke (width 0) (type default))
+    (uuid d2bd25d3-e663-4848-ac4b-38c7af8d22c0)
   )
   (wire (pts (xy 375.92 31.115) (xy 383.54 31.115))
     (stroke (width 0) (type default))
@@ -3117,7 +3051,7 @@
     (stroke (width 0) (type default))
     (uuid db414c12-766e-4194-a391-b947c910d971)
   )
-  (wire (pts (xy 183.515 38.1) (xy 194.31 38.1))
+  (wire (pts (xy 173.355 38.1) (xy 184.15 38.1))
     (stroke (width 0) (type default))
     (uuid db8b3ba3-84ba-476d-a45d-24a993df3930)
   )
@@ -3144,6 +3078,10 @@
   (wire (pts (xy 146.685 212.09) (xy 153.67 212.09))
     (stroke (width 0) (type default))
     (uuid e358418a-47a9-4366-a9b0-f407cbf0f592)
+  )
+  (wire (pts (xy 125.095 38.1) (xy 125.095 34.29))
+    (stroke (width 0) (type default))
+    (uuid e7ea818f-5884-4763-a706-d229f8eb501c)
   )
   (wire (pts (xy 245.745 168.91) (xy 245.745 171.45))
     (stroke (width 0) (type default))
@@ -3216,6 +3154,10 @@
   (wire (pts (xy 278.13 195.58) (xy 278.13 201.93))
     (stroke (width 0) (type solid))
     (uuid f9aa0089-5694-4544-8d4d-58cb0e760c94)
+  )
+  (wire (pts (xy 125.095 34.29) (xy 125.095 24.765))
+    (stroke (width 0) (type default))
+    (uuid fd73b803-15ea-4ca8-8487-6f316e05044c)
   )
 
   (image (at 72.39 195.58)
@@ -4606,11 +4548,6 @@
     )
   )
 
-  (text "Alternative inductor: \n\nNRS4018T100MDGJ\nby Taiyo Yuden\nC222882\n\nTYA4012100M-10\nby Laird Performance Materials \n\n\n"
-    (at 313.055 46.355 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 27907456-675f-4372-8456-3255fdd1a95d)
-  )
   (text "Equivalent series resistance (ESR) <= 70 kΩ." (at 106.045 149.86 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 3fd4655a-2012-4d02-9ec7-589051a5f2c0)
@@ -4633,14 +4570,14 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 79579192-e0f6-4106-ad0c-589c09a8b8a3)
   )
+  (text "TPS61023DRLT\n\nSWPA4030S2R2NT\nC279948" (at 152.4 22.86 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 986aa7b0-bb2d-445f-ab60-24ff784bd6d9)
+  )
   (text "C30,C31 = 2 * C_{L} - 2 * C_{stray}\nC_{stray} = 2pF (MCU pin) + 2pF (pcb trace)\nC30,C31 = 2 * 12.5pF - 2 * 4pF = 17pF"
     (at 120.65 195.58 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b7950a06-bcb4-4fe2-8bcf-724c1c331239)
-  )
-  (text "Alternatives:\nVLS6045EX-100M\nNR6045T100M " (at 122.555 19.685 0)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid b7af7aef-666c-4a66-ae96-0ae459fd7a98)
   )
   (text "C38,C39 = 2 * C_{L} - 2 * C_{stray}\nC_{stray} = 2pF (MCU pin) + 2pF (pcb trace)\nC38,C39 = 2 * 10pF - 2 * 4pF = 12pF"
     (at 140.97 240.03 0)
@@ -4672,7 +4609,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 0eb85539-9ac9-472a-9a2d-d8ca5a581695)
   )
-  (label "FB_MAIN" (at 140.97 40.64 0) (fields_autoplaced)
+  (label "FB_MAIN" (at 153.035 45.72 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 103d472b-fdd9-4a32-a149-aa0d4f028dfb)
   )
@@ -4711,10 +4648,6 @@
   (label "DISPLAY_BUSY" (at 396.24 92.71 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 32fed5fb-3400-4a62-ad81-ceb30d9e046a)
-  )
-  (label "EN_MAIN" (at 107.95 38.1 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid 366e2e40-4401-4f99-aba8-c5f6cda527f9)
   )
   (label "I2C_SDA" (at 180.975 177.8 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -4860,7 +4793,7 @@
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid cb687c3b-1591-4465-a713-b04fa166c9f2)
   )
-  (label "SW_MAIN" (at 133.985 24.765 0) (fields_autoplaced)
+  (label "SW_MAIN" (at 142.24 24.765 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid d1464c94-80dc-42bf-8884-85794e61121e)
   )
@@ -4887,10 +4820,6 @@
   (label "VGL" (at 396.24 80.01 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid eecfbc5d-be21-4474-a03d-cecc3d10934b)
-  )
-  (label "REF_MAIN" (at 139.7 45.085 0) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify left bottom))
-    (uuid f2d69a70-3567-4885-8ce2-e03e20a68002)
   )
   (label "VIN" (at 69.85 24.765 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -4924,7 +4853,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0129") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0129") (unit 1)
         )
       )
     )
@@ -4933,10 +4862,10 @@
   (symbol (lib_id "Device:R") (at 372.11 56.515 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 035569f9-542d-4648-a520-802b645e645f)
-    (property "Reference" "R6" (at 374.65 55.2449 0)
+    (property "Reference" "R6" (at 374.65 55.88 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "0R47" (at 374.65 57.7849 0)
+    (property "Value" "2R2" (at 374.65 58.42 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 370.332 56.515 90)
@@ -4945,10 +4874,16 @@
     (property "Datasheet" "~" (at 372.11 56.515 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C103895" (at 372.11 56.515 0)
+    (property "LCSC" "C22939" (at 372.11 56.515 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "DNF" "" (at 372.11 56.515 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Manufacturer" "" (at 372.11 56.515 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "PartNo" "" (at 372.11 56.515 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 3d92b7aa-1f9f-4067-abd8-cf3ecae75e5c))
@@ -4956,7 +4891,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R6") (unit 1) (value "0R47") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R6") (unit 1)
         )
       )
     )
@@ -4981,7 +4916,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR025") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR025") (unit 1)
         )
       )
     )
@@ -5006,63 +4941,31 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR018") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR018") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Device:C") (at 139.7 48.895 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 066a0256-671d-4650-82e0-b36e6236c74a)
-    (property "Reference" "C27" (at 142.621 47.7266 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "1u" (at 142.621 50.038 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 140.6652 52.705 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 139.7 48.895 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C52923" (at 139.7 48.895 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "DNF" "" (at 139.7 48.895 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 67e5c2bc-a335-4d88-b4af-ebb287c6d0f7))
-    (pin "2" (uuid 38898ace-6705-4f47-8b94-83501fa906e4))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C27") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 183.515 41.91 0) (unit 1)
+  (symbol (lib_id "Device:C") (at 173.355 41.91 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 07f721b6-db14-44a8-8b98-f870e9c81acb)
-    (property "Reference" "C22" (at 186.436 40.7416 0)
+    (property "Reference" "C22" (at 176.276 40.7416 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "1u" (at 186.436 43.053 0)
+    (property "Value" "1u" (at 176.276 43.053 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 184.4802 45.72 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 174.3202 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 183.515 41.91 0)
+    (property "Datasheet" "~" (at 173.355 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C52923" (at 183.515 41.91 0)
+    (property "LCSC" "C52923" (at 173.355 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "DNF" "" (at 183.515 41.91 0)
+    (property "DNF" "" (at 173.355 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid dd137c73-448b-43ec-a8b2-cc8c00a141f7))
@@ -5070,7 +4973,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C22") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C22") (unit 1)
         )
       )
     )
@@ -5095,42 +4998,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0142") (unit 1) (value "+3V3") (footprint "")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 163.195 41.91 0) (unit 1)
-    (in_bom no) (on_board yes) (dnp yes)
-    (uuid 0caa4765-8957-4871-afa2-daf908f6811c)
-    (property "Reference" "C42" (at 166.116 40.7416 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "10p" (at 166.116 43.053 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 164.1602 45.72 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 163.195 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Manufacturer" "" (at 163.195 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "PartNo" "" (at 163.195 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "DNF" "DNF" (at 163.195 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 9d2de94c-dbb4-4787-acb3-7d8165306b23))
-    (pin "2" (uuid 3271169f-d06c-457d-a846-0074e52adf38))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C42") (unit 1) (value "10p") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "#PWR0142") (unit 1)
         )
       )
     )
@@ -5199,7 +5067,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "U1") (unit 1) (value "ESP32-C3FN4") (footprint "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.7x3.7mm_ThermalVias")
+          (reference "U1") (unit 1)
         )
       )
     )
@@ -5224,7 +5092,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0106") (unit 1) (value "+BATT") (footprint "")
+          (reference "#PWR0106") (unit 1)
         )
       )
     )
@@ -5249,7 +5117,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0145") (unit 1) (value "VBUS") (footprint "")
+          (reference "#PWR0145") (unit 1)
         )
       )
     )
@@ -5274,7 +5142,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0118") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0118") (unit 1)
         )
       )
     )
@@ -5299,7 +5167,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0134") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0134") (unit 1)
         )
       )
     )
@@ -5324,7 +5192,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0130") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0130") (unit 1)
         )
       )
     )
@@ -5356,7 +5224,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R13") (unit 1) (value "1M") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R13") (unit 1)
         )
       )
     )
@@ -5388,7 +5256,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R4") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R4") (unit 1)
         )
       )
     )
@@ -5413,7 +5281,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0139") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0139") (unit 1)
         )
       )
     )
@@ -5445,7 +5313,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C24") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C24") (unit 1)
         )
       )
     )
@@ -5477,7 +5345,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R20") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R20") (unit 1)
         )
       )
     )
@@ -5509,7 +5377,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C11") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C11") (unit 1)
         )
       )
     )
@@ -5549,7 +5417,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "J2") (unit 1) (value "Conn_01x06") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x07_P2.54mm_Vertical")
+          (reference "J2") (unit 1)
         )
       )
     )
@@ -5581,7 +5449,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C30") (unit 1) (value "18p") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C30") (unit 1)
         )
       )
     )
@@ -5613,7 +5481,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R22") (unit 1) (value "1M") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R22") (unit 1)
         )
       )
     )
@@ -5638,7 +5506,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0124") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0124") (unit 1)
         )
       )
     )
@@ -5676,7 +5544,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "SW1") (unit 1) (value "SW_Push") (footprint "miceuz-lib:SHOUHAN_TS24CA")
+          (reference "SW1") (unit 1)
         )
       )
     )
@@ -5708,7 +5576,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R11") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R11") (unit 1)
         )
       )
     )
@@ -5740,7 +5608,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C41") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C41") (unit 1)
         )
       )
     )
@@ -5777,7 +5645,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "Y3") (unit 1) (value "40MHz 10ppm") (footprint "Crystal:Crystal_SMD_2016-4Pin_2.0x1.6mm")
+          (reference "Y3") (unit 1)
         )
       )
     )
@@ -5809,7 +5677,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R23") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R23") (unit 1)
         )
       )
     )
@@ -5841,7 +5709,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C26") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C26") (unit 1)
         )
       )
     )
@@ -5873,47 +5741,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C10") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Regulator_Switching:AP3012") (at 129.54 38.1 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 2e437d72-977f-4ebf-b2ee-6bdf5462328f)
-    (property "Reference" "U3" (at 129.54 28.575 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "NCP1421" (at 129.54 31.115 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Package_SO:MSOP-8_3x3mm_P0.65mm" (at 130.175 44.45 0)
-      (effects (font (size 1.27 1.27) italic) (justify left) hide)
-    )
-    (property "Datasheet" "https://eu.mouser.com/datasheet/2/308/NCP1421_D-1812459.pdf" (at 130.81 50.8 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "DNF" "" (at 129.54 38.1 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Manufacturer" "" (at 129.54 38.1 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "PartNo" "" (at 129.54 38.1 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid ff2f7a88-685e-4ada-b71e-f485ba866535))
-    (pin "2" (uuid 6f5dd3ce-1f2a-4b97-884a-4876233ba6b6))
-    (pin "4" (uuid 894509b5-59b2-4651-9847-4b0d74cd1633))
-    (pin "5" (uuid f9ac27c0-45b7-4cf6-b9e0-baa8f46c4185))
-    (pin "6" (uuid ddf215cf-f84c-49c6-872f-66e619e59d84))
-    (pin "7" (uuid 6693ff49-1ad1-458d-8711-25840741ea29))
-    (pin "8" (uuid 8c4cbfca-cdc1-4bad-9c13-86629d0693bb))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "U3") (unit 1) (value "NCP1421") (footprint "Package_SO:MSOP-8_3x3mm_P0.65mm")
+          (reference "C10") (unit 1)
         )
       )
     )
@@ -5938,7 +5766,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0119") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0119") (unit 1)
         )
       )
     )
@@ -5963,7 +5791,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0150") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0150") (unit 1)
         )
       )
     )
@@ -5995,7 +5823,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R12") (unit 1) (value "1M") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R12") (unit 1)
         )
       )
     )
@@ -6023,7 +5851,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "TP6") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.5mm")
+          (reference "TP6") (unit 1)
         )
       )
     )
@@ -6048,34 +5876,34 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0137") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0137") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Device:C_Polarized") (at 194.31 41.91 0) (unit 1)
+  (symbol (lib_id "Device:C_Polarized") (at 184.15 41.91 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 33437aa5-cba5-4be4-990e-12d9c0b2547a)
-    (property "Reference" "C1" (at 198.12 40.386 0)
+    (property "Reference" "C1" (at 187.96 40.386 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "100u" (at 198.12 42.926 0)
+    (property "Value" "100u" (at 187.96 42.926 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-15_AVX-H" (at 195.2752 45.72 0)
+    (property "Footprint" "Capacitor_Tantalum_SMD:CP_EIA-3528-15_AVX-H" (at 185.1152 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 194.31 41.91 0)
+    (property "Datasheet" "~" (at 184.15 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Manufacturer" "" (at 194.31 41.91 0)
+    (property "Manufacturer" "" (at 184.15 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "PartNo" "" (at 194.31 41.91 0)
+    (property "PartNo" "" (at 184.15 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C16133" (at 194.31 41.91 0)
+    (property "LCSC" "C16133" (at 184.15 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 78ee304e-da3e-4322-90c2-5055b6322c5c))
@@ -6083,7 +5911,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C1") (unit 1) (value "100u") (footprint "Capacitor_Tantalum_SMD:CP_EIA-3528-15_AVX-H")
+          (reference "C1") (unit 1)
         )
       )
     )
@@ -6108,39 +5936,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR010") (unit 1) (value "GND") (footprint "")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:R") (at 111.125 41.91 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 3523b42d-b3a4-4ce6-9871-6fae6018f789)
-    (property "Reference" "R15" (at 112.903 40.7416 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "300k" (at 112.903 43.053 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 109.347 41.91 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 111.125 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C23024" (at 111.125 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "DNF" "" (at 111.125 41.91 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 69a9bc75-6778-4845-a2d9-561c23312ae1))
-    (pin "2" (uuid dad27a71-6f59-450d-aa5d-4c2279fbd5aa))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R15") (unit 1) (value "300k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "#PWR010") (unit 1)
         )
       )
     )
@@ -6165,7 +5961,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0115") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0115") (unit 1)
         )
       )
     )
@@ -6190,7 +5986,45 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0149") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0149") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:C") (at 69.85 63.5 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 3de2ffc8-59f1-4a63-b1d0-d8d4b51ce4ac)
+    (property "Reference" "C27" (at 72.771 62.3316 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "22u" (at 72.771 64.643 0)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 70.8152 67.31 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 69.85 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Manufacturer" "" (at 69.85 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "PartNo" "CL10A226MP8NUNE" (at 69.85 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C60077" (at 69.85 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "DNF" "" (at 69.85 63.5 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 82980c67-c29d-4433-b177-7b601a9c8099))
+    (pin "2" (uuid 34263584-66a4-4603-846c-1927fbb6f372))
+    (instances
+      (project "sensor-epaper"
+        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
+          (reference "C27") (unit 1)
         )
       )
     )
@@ -6227,7 +6061,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "J1") (unit 1) (value "i2c") (footprint "Connector_PinHeader_1.27mm:PinHeader_1x04_P1.27mm_Vertical_SMD_Pin1Right")
+          (reference "J1") (unit 1)
         )
       )
     )
@@ -6265,7 +6099,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R19") (unit 1) (value "0") (footprint "Resistor_SMD:R_0402_1005Metric")
+          (reference "R19") (unit 1)
         )
       )
     )
@@ -6303,7 +6137,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C38") (unit 1) (value "12p") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C38") (unit 1)
         )
       )
     )
@@ -6335,7 +6169,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C16") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C16") (unit 1)
         )
       )
     )
@@ -6370,7 +6204,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C37") (unit 1) (value "?") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C37") (unit 1)
         )
       )
     )
@@ -6402,7 +6236,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C47") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C47") (unit 1)
         )
       )
     )
@@ -6440,32 +6274,32 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R14") (unit 1) (value "0") (footprint "Resistor_SMD:R_0402_1005Metric")
+          (reference "R14") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:GND") (at 129.54 50.165 0) (mirror y) (unit 1)
+  (symbol (lib_id "power:GND") (at 137.16 50.8 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4e1ded86-ed89-4bc8-b317-01dd4edbb023)
-    (property "Reference" "#PWR0112" (at 129.54 56.515 0)
+    (property "Reference" "#PWR0112" (at 137.16 57.15 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 129.413 54.5592 0)
+    (property "Value" "GND" (at 137.033 55.1942 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 129.54 50.165 0)
+    (property "Footprint" "" (at 137.16 50.8 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 129.54 50.165 0)
+    (property "Datasheet" "" (at 137.16 50.8 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid d3bc4421-878f-4af4-a007-b45405075333))
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0112") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0112") (unit 1)
         )
       )
     )
@@ -6490,7 +6324,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0101") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0101") (unit 1)
         )
       )
     )
@@ -6523,7 +6357,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "Q1") (unit 1) (value "Q_NMOS_GSD") (footprint "Package_TO_SOT_SMD:SOT-23")
+          (reference "Q1") (unit 1)
         )
       )
     )
@@ -6555,7 +6389,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C33") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C33") (unit 1)
         )
       )
     )
@@ -6580,7 +6414,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR02") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR02") (unit 1)
         )
       )
     )
@@ -6612,7 +6446,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C13") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C13") (unit 1)
         )
       )
     )
@@ -6637,7 +6471,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0117") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0117") (unit 1)
         )
       )
     )
@@ -6669,32 +6503,32 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C32") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C32") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:GND") (at 194.31 45.72 0) (mirror y) (unit 1)
+  (symbol (lib_id "power:GND") (at 184.15 45.72 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 509a0acd-72f4-4fcf-9874-8d796b096db6)
-    (property "Reference" "#PWR0114" (at 194.31 52.07 0)
+    (property "Reference" "#PWR0114" (at 184.15 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 194.183 50.1142 0)
+    (property "Value" "GND" (at 184.023 50.1142 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 194.31 45.72 0)
+    (property "Footprint" "" (at 184.15 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 194.31 45.72 0)
+    (property "Datasheet" "" (at 184.15 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 78da056f-c335-49b9-96fd-14b9c7ef2e21))
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0114") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0114") (unit 1)
         )
       )
     )
@@ -6726,7 +6560,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "D3") (unit 1) (value "MBR0530") (footprint "Diode_SMD:D_SOD-123")
+          (reference "D3") (unit 1)
         )
       )
     )
@@ -6751,7 +6585,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0103") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0103") (unit 1)
         )
       )
     )
@@ -6776,7 +6610,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR014") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR014") (unit 1)
         )
       )
     )
@@ -6801,7 +6635,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0148") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0148") (unit 1)
         )
       )
     )
@@ -6826,7 +6660,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0127") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0127") (unit 1)
         )
       )
     )
@@ -6851,7 +6685,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR021") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR021") (unit 1)
         )
       )
     )
@@ -6886,7 +6720,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "J3") (unit 1) (value "Ufl") (footprint "Connector_Coaxial:U.FL_Hirose_U.FL-R-SMT-1_Vertical")
+          (reference "J3") (unit 1)
         )
       )
     )
@@ -6911,7 +6745,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0123") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0123") (unit 1)
         )
       )
     )
@@ -6950,7 +6784,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "U2") (unit 1) (value "AMS1117-3.3") (footprint "Package_TO_SOT_SMD:SOT-223-3_TabPin2")
+          (reference "U2") (unit 1)
         )
       )
     )
@@ -6999,7 +6833,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "U4") (unit 1) (value "SHT40-AD1B-R2") (footprint "miceuz-lib:Sensirion_SHT40-AD1B-R2")
+          (reference "U4") (unit 1)
         )
       )
     )
@@ -7031,31 +6865,31 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R5") (unit 1) (value "4.7k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R5") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Device:R") (at 153.67 53.34 0) (unit 1)
+  (symbol (lib_id "Device:R") (at 151.13 49.53 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5cee8cc6-ff8d-4696-83e2-af691470aa32)
-    (property "Reference" "R17" (at 155.448 52.1716 0)
+    (property "Reference" "R17" (at 152.908 48.3616 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "200k" (at 155.448 54.483 0)
+    (property "Value" "200k" (at 152.908 50.673 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 151.892 53.34 90)
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.352 49.53 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 153.67 53.34 0)
+    (property "Datasheet" "~" (at 151.13 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C25811" (at 153.67 53.34 0)
+    (property "LCSC" "C25811" (at 151.13 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "DNF" "" (at 153.67 53.34 0)
+    (property "DNF" "" (at 151.13 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 22687ef4-05b6-41d2-8015-e81243fae657))
@@ -7063,7 +6897,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R17") (unit 1) (value "200k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R17") (unit 1)
         )
       )
     )
@@ -7075,8 +6909,8 @@
     (property "Reference" "D1" (at 72.39 51.435 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "1N4148" (at 72.39 53.975 90)
-      (effects (font (size 1.27 1.27)) (justify left))
+    (property "Value" "2CZ4007" (at 72.39 53.975 90)
+      (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Footprint" "Diode_SMD:D_SOD-123" (at 69.85 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -7084,10 +6918,16 @@
     (property "Datasheet" "~" (at 69.85 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C81598" (at 69.85 52.07 0)
+    (property "LCSC" "C85712" (at 69.85 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "DNF" "" (at 69.85 52.07 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Manufacturer" "" (at 69.85 52.07 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "PartNo" "" (at 69.85 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 269a7ca4-2feb-4ed3-9fc3-542ad275c127))
@@ -7095,7 +6935,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "D1") (unit 1) (value "1N4148") (footprint "Diode_SMD:D_SOD-123")
+          (reference "D1") (unit 1)
         )
       )
     )
@@ -7120,7 +6960,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0108") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0108") (unit 1)
         )
       )
     )
@@ -7152,7 +6992,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C48") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C48") (unit 1)
         )
       )
     )
@@ -7180,7 +7020,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "TP7") (unit 1) (value "TestPoint") (footprint "TestPoint:TestPoint_Pad_D1.5mm")
+          (reference "TP7") (unit 1)
         )
       )
     )
@@ -7225,7 +7065,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "Q3") (unit 1) (value "NX2301P") (footprint "Package_TO_SOT_SMD:SOT-23")
+          (reference "Q3") (unit 1)
         )
       )
     )
@@ -7257,45 +7097,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C39") (unit 1) (value "12p") (footprint "Capacitor_SMD:C_0402_1005Metric")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:C") (at 69.85 63.5 0) (mirror y) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 741cff41-681c-4aa7-a8a7-7e0a9e52b20f)
-    (property "Reference" "C44" (at 66.929 62.3316 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "1u" (at 66.929 64.643 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 68.8848 67.31 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 69.85 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C52923" (at 69.85 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "DNF" "" (at 69.85 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Manufacturer" "" (at 69.85 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "PartNo" "" (at 69.85 63.5 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 4d44753f-abd7-441f-9f22-0268db3bd3f0))
-    (pin "2" (uuid c8bd054c-7534-4598-a3aa-1aa89f413e8b))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C44") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C39") (unit 1)
         )
       )
     )
@@ -7320,7 +7122,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0133") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0133") (unit 1)
         )
       )
     )
@@ -7352,7 +7154,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C23") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C23") (unit 1)
         )
       )
     )
@@ -7377,7 +7179,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0131") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0131") (unit 1)
         )
       )
     )
@@ -7402,7 +7204,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0146") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0146") (unit 1)
         )
       )
     )
@@ -7427,19 +7229,19 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0107") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0107") (unit 1)
         )
       )
     )
   )
 
   (symbol (lib_id "Device:L") (at 364.49 38.735 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom yes) (on_board yes) (dnp no)
     (uuid 81cf94f3-96f3-453f-bb08-baf0c35ff3d3)
-    (property "Reference" "L1" (at 364.49 32.385 90)
+    (property "Reference" "L1" (at 363.855 34.29 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "10u 1A" (at 364.49 34.925 90)
+    (property "Value" "47u 0.5A" (at 363.855 36.83 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Inductor_SMD:L_Taiyo-Yuden_NR-40xx" (at 364.49 38.735 0)
@@ -7448,13 +7250,13 @@
     (property "Datasheet" "~" (at 364.49 38.735 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Manufacturer" "Sunlord" (at 364.49 38.735 0)
+    (property "Manufacturer" "CENKER" (at 364.49 38.735 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "PartNo" "SWPA4030S100MT" (at 364.49 38.735 0)
+    (property "PartNo" "CKCS4030-47uH/M" (at 364.49 38.735 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C38117" (at 364.49 38.735 0)
+    (property "LCSC" "C354593" (at 364.49 38.735 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "DNF" "" (at 364.49 38.735 0)
@@ -7465,57 +7267,32 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "L1") (unit 1) (value "10u 1A") (footprint "Inductor_SMD:L_Taiyo-Yuden_NR-40xx")
+          (reference "L1") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:GND") (at 183.515 45.72 0) (mirror y) (unit 1)
+  (symbol (lib_id "power:GND") (at 173.355 45.72 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8220ea28-3495-4c4b-89eb-b6e111474e58)
-    (property "Reference" "#PWR0151" (at 183.515 52.07 0)
+    (property "Reference" "#PWR0151" (at 173.355 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 183.388 50.1142 0)
+    (property "Value" "GND" (at 173.228 50.1142 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 183.515 45.72 0)
+    (property "Footprint" "" (at 173.355 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 183.515 45.72 0)
+    (property "Datasheet" "" (at 173.355 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 9dd5b62b-d63b-4e91-bec9-2e47628d7f42))
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0151") (unit 1) (value "GND") (footprint "")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:GND") (at 139.7 52.705 0) (mirror y) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 8479cf88-5ffc-441e-a49c-bc0fb53ac3ac)
-    (property "Reference" "#PWR0121" (at 139.7 59.055 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "GND" (at 139.573 57.0992 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 139.7 52.705 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 139.7 52.705 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 5a1d5492-606d-4255-a181-edb119fd6223))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0121") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0151") (unit 1)
         )
       )
     )
@@ -7547,7 +7324,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C17") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C17") (unit 1)
         )
       )
     )
@@ -7579,7 +7356,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C14") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C14") (unit 1)
         )
       )
     )
@@ -7604,7 +7381,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0122") (unit 1) (value "VBUS") (footprint "")
+          (reference "#PWR0122") (unit 1)
         )
       )
     )
@@ -7629,7 +7406,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0141") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0141") (unit 1)
         )
       )
     )
@@ -7662,7 +7439,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "FID1") (unit 1) (value "Fiducial") (footprint "Fiducial:Fiducial_1mm_Mask2mm")
+          (reference "FID1") (unit 1)
         )
       )
     )
@@ -7687,7 +7464,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR03") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR03") (unit 1)
         )
       )
     )
@@ -7712,7 +7489,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR026") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -7737,7 +7514,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0147") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0147") (unit 1)
         )
       )
     )
@@ -7762,7 +7539,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0111") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0111") (unit 1)
         )
       )
     )
@@ -7794,7 +7571,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C9") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -7819,7 +7596,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0105") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0105") (unit 1)
         )
       )
     )
@@ -7851,7 +7628,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "D5") (unit 1) (value "MBR0530") (footprint "Diode_SMD:D_SOD-123")
+          (reference "D5") (unit 1)
         )
       )
     )
@@ -7883,7 +7660,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C7") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C7") (unit 1)
         )
       )
     )
@@ -7925,7 +7702,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "J9") (unit 1) (value "USB micro") (footprint "miceuz-lib:XKB_U254-051T-4BH83-F1S")
+          (reference "J9") (unit 1)
         )
       )
     )
@@ -7963,7 +7740,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C43") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C43") (unit 1)
         )
       )
     )
@@ -7998,7 +7775,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C36") (unit 1) (value "?") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C36") (unit 1)
         )
       )
     )
@@ -8023,7 +7800,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR027") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR027") (unit 1)
         )
       )
     )
@@ -8048,7 +7825,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0152") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0152") (unit 1)
         )
       )
     )
@@ -8080,7 +7857,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C12") (unit 1) (value "4u7") (footprint "Capacitor_SMD:C_0603_1608Metric")
+          (reference "C12") (unit 1)
         )
       )
     )
@@ -8112,7 +7889,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C35") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C35") (unit 1)
         )
       )
     )
@@ -8137,7 +7914,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0120") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0120") (unit 1)
         )
       )
     )
@@ -8162,7 +7939,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0138") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0138") (unit 1)
         )
       )
     )
@@ -8194,7 +7971,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C8") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C8") (unit 1)
         )
       )
     )
@@ -8232,37 +8009,37 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "L3") (unit 1) (value "0") (footprint "Inductor_SMD:L_0402_1005Metric")
+          (reference "L3") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Device:R") (at 153.67 41.91 0) (unit 1)
+  (symbol (lib_id "Device:R") (at 151.13 41.91 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bbd1dc53-7d70-4143-9b49-f8d235f23cc5)
-    (property "Reference" "R16" (at 155.448 40.7416 0)
+    (property "Reference" "R16" (at 152.908 40.7416 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "348k" (at 155.448 43.053 0)
+    (property "Value" "348k" (at 152.908 43.053 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 151.892 41.91 90)
+    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 149.352 41.91 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 153.67 41.91 0)
+    (property "Datasheet" "~" (at 151.13 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Manufacturer" "" (at 153.67 41.91 0)
+    (property "Manufacturer" "" (at 151.13 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "PartNo" "" (at 153.67 41.91 0)
+    (property "PartNo" "" (at 151.13 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C23006" (at 153.67 41.91 0)
+    (property "LCSC" "C23006" (at 151.13 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "DNF" "" (at 153.67 41.91 0)
+    (property "DNF" "" (at 151.13 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 1182e4e9-119a-4e3a-bbf5-d8a5a114465e))
@@ -8270,7 +8047,46 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R16") (unit 1) (value "348k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R16") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "miceuz:TPS61023") (at 137.16 41.91 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid bc5f9e50-89cc-4099-9b0e-0f32c04c286a)
+    (property "Reference" "U5" (at 136.525 27.94 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "TPS61023" (at 136.525 30.48 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-363_SC-70-6_Handsoldering" (at 137.16 41.91 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tps61023.pdf" (at 137.16 41.91 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Manufacturer" "Texas Instruments" (at 137.16 41.91 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "PartNo" "TPS61023" (at 137.16 41.91 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "LCSC" "C919459" (at 137.16 41.91 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 9ebf705a-e590-4fe5-8075-33b66bafe0d7))
+    (pin "2" (uuid 5ab950f3-7bd1-4646-929d-4de99f78ee70))
+    (pin "3" (uuid 0d176c37-7a7b-4aca-87d7-e5189306d996))
+    (pin "4" (uuid 8a7a5a38-145e-4561-962a-0c07fc23e737))
+    (pin "5" (uuid 03579b06-79f6-4246-8969-359c1e234421))
+    (pin "6" (uuid 0edd0b98-4fcd-4ce5-bf51-202f32027a6f))
+    (instances
+      (project "sensor-epaper"
+        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
+          (reference "U5") (unit 1)
         )
       )
     )
@@ -8330,7 +8146,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "J4") (unit 1) (value "Display") (footprint "miceuz-lib:SFV24R-4STE1HLF")
+          (reference "J4") (unit 1)
         )
       )
     )
@@ -8362,7 +8178,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C40") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C40") (unit 1)
         )
       )
     )
@@ -8396,7 +8212,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "AE1") (unit 1) (value "PCB Antenna") (footprint "miceuz-lib:Texas_SWRA117D_2.4GHz_Left")
+          (reference "AE1") (unit 1)
         )
       )
     )
@@ -8421,7 +8237,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0135") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0135") (unit 1)
         )
       )
     )
@@ -8446,32 +8262,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR023") (unit 1) (value "GND") (footprint "")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:GND") (at 111.125 45.72 0) (mirror y) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid cc55b1d5-b6a8-43bb-a379-137f86df6d6e)
-    (property "Reference" "#PWR0116" (at 111.125 52.07 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "GND" (at 110.998 50.1142 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 111.125 45.72 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 111.125 45.72 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 5839cf34-7bc7-4401-8415-d065d04b1bc5))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0116") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR023") (unit 1)
         )
       )
     )
@@ -8496,37 +8287,37 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR08") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR08") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Device:L") (at 128.905 24.765 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+  (symbol (lib_id "Device:L") (at 136.525 24.765 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
     (uuid cddc293e-6a0c-4947-afeb-6d1bbd6221e0)
-    (property "Reference" "L2" (at 128.905 21.59 90)
+    (property "Reference" "L2" (at 136.525 20.955 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "10u 1A" (at 128.905 24.13 90)
+    (property "Value" "2u2 3A" (at 136.525 23.495 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Inductor_SMD:L_Taiyo-Yuden_NR-60xx" (at 128.905 24.765 0)
+    (property "Footprint" "Inductor_SMD:L_Taiyo-Yuden_NR-40xx" (at 136.525 24.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 128.905 24.765 0)
+    (property "Datasheet" "~" (at 136.525 24.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Manufacturer" "Taiyo Yuden" (at 128.905 24.765 0)
+    (property "Manufacturer" "Sunlord" (at 136.525 24.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "PartNo" "NRS4018T100MDGJ" (at 128.905 24.765 0)
+    (property "PartNo" "SWPA4030S2R2NT" (at 136.525 24.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C79272" (at 128.905 24.765 0)
+    (property "LCSC" "C279948" (at 136.525 24.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "DNF" "" (at 128.905 24.765 0)
+    (property "DNF" "" (at 136.525 24.765 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid ccfa827c-587f-4b97-9579-96891570445a))
@@ -8534,7 +8325,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "L2") (unit 1) (value "10u 1A") (footprint "Inductor_SMD:L_Taiyo-Yuden_NR-60xx")
+          (reference "L2") (unit 1)
         )
       )
     )
@@ -8572,7 +8363,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R25") (unit 1) (value "0") (footprint "Resistor_SMD:R_0402_1005Metric")
+          (reference "R25") (unit 1)
         )
       )
     )
@@ -8604,7 +8395,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C46") (unit 1) (value "22u") (footprint "Capacitor_SMD:C_0603_1608Metric")
+          (reference "C46") (unit 1)
         )
       )
     )
@@ -8629,7 +8420,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR024") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR024") (unit 1)
         )
       )
     )
@@ -8661,32 +8452,32 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R21") (unit 1) (value "1M") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R21") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:GND") (at 174.625 45.72 0) (mirror y) (unit 1)
+  (symbol (lib_id "power:GND") (at 164.465 45.72 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d5d11c40-ca6f-4648-a86d-fe2e7ba5d1c8)
-    (property "Reference" "#PWR0109" (at 174.625 52.07 0)
+    (property "Reference" "#PWR0109" (at 164.465 52.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 174.498 50.1142 0)
+    (property "Value" "GND" (at 164.338 50.1142 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 174.625 45.72 0)
+    (property "Footprint" "" (at 164.465 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 174.625 45.72 0)
+    (property "Datasheet" "" (at 164.465 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid fbdc9b33-1ad6-465a-a09a-8ac07a062f95))
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0109") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0109") (unit 1)
         )
       )
     )
@@ -8711,39 +8502,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0140") (unit 1) (value "GND") (footprint "")
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:R") (at 95.25 28.575 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid d7fc40f7-973e-4456-8ca4-665c432ee210)
-    (property "Reference" "R18" (at 97.028 27.4066 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "220k" (at 97.028 29.718 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 93.472 28.575 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 95.25 28.575 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "LCSC" "C22961" (at 95.25 28.575 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "DNF" "" (at 95.25 28.575 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid ac809504-9933-4d50-8f92-f94cc12f9ea1))
-    (pin "2" (uuid 39cc030c-2fef-438e-b649-2d26dda23674))
-    (instances
-      (project "sensor-epaper"
-        (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R18") (unit 1) (value "220k") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "#PWR0140") (unit 1)
         )
       )
     )
@@ -8772,7 +8531,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "D8") (unit 1) (value "LED") (footprint "LED_SMD:LED_0603_1608Metric")
+          (reference "D8") (unit 1)
         )
       )
     )
@@ -8797,7 +8556,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0128") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0128") (unit 1)
         )
       )
     )
@@ -8829,7 +8588,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "D4") (unit 1) (value "MBR0530") (footprint "Diode_SMD:D_SOD-123")
+          (reference "D4") (unit 1)
         )
       )
     )
@@ -8854,7 +8613,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0132") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0132") (unit 1)
         )
       )
     )
@@ -8886,7 +8645,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C29") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C29") (unit 1)
         )
       )
     )
@@ -8921,7 +8680,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "BT2") (unit 1) (value "Battery_Cell") (footprint "miceuz-lib:AA_KEYCO_53_SMD")
+          (reference "BT2") (unit 1)
         )
       )
     )
@@ -8953,7 +8712,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C34") (unit 1) (value "22u") (footprint "Capacitor_SMD:C_0603_1608Metric")
+          (reference "C34") (unit 1)
         )
       )
     )
@@ -8978,7 +8737,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0143") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0143") (unit 1)
         )
       )
     )
@@ -9010,7 +8769,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C31") (unit 1) (value "18p") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C31") (unit 1)
         )
       )
     )
@@ -9042,7 +8801,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C18") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C18") (unit 1)
         )
       )
     )
@@ -9067,7 +8826,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0126") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0126") (unit 1)
         )
       )
     )
@@ -9102,32 +8861,32 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "Y2") (unit 1) (value "32kHz") (footprint "Crystal:Crystal_SMD_2012-2Pin_2.0x1.2mm")
+          (reference "Y2") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:+3V3") (at 183.515 38.1 0) (unit 1)
+  (symbol (lib_id "power:+3V3") (at 173.355 38.1 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e5f7cbd1-c5dc-4657-aec8-4539a4c291e1)
-    (property "Reference" "#PWR0104" (at 183.515 41.91 0)
+    (property "Reference" "#PWR0104" (at 173.355 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "+3V3" (at 183.515 34.29 0)
+    (property "Value" "+3V3" (at 173.355 34.29 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 183.515 38.1 0)
+    (property "Footprint" "" (at 173.355 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 183.515 38.1 0)
+    (property "Datasheet" "" (at 173.355 38.1 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 08191bec-1fcc-4b30-930e-9b8d2fda2a01))
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0104") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0104") (unit 1)
         )
       )
     )
@@ -9152,7 +8911,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0110") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0110") (unit 1)
         )
       )
     )
@@ -9177,7 +8936,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0136") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0136") (unit 1)
         )
       )
     )
@@ -9215,7 +8974,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R24") (unit 1) (value "150") (footprint "Resistor_SMD:R_0603_1608Metric")
+          (reference "R24") (unit 1)
         )
       )
     )
@@ -9253,7 +9012,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C25") (unit 1) (value "22u") (footprint "Capacitor_SMD:C_0603_1608Metric")
+          (reference "C25") (unit 1)
         )
       )
     )
@@ -9278,37 +9037,37 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0102") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0102") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Device:C") (at 174.625 41.91 0) (unit 1)
+  (symbol (lib_id "Device:C") (at 164.465 41.91 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f131a8e7-61e9-44f3-bd16-a32ae3411884)
-    (property "Reference" "C21" (at 177.546 40.7416 0)
+    (property "Reference" "C21" (at 167.386 40.7416 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "22u" (at 177.546 43.053 0)
+    (property "Value" "22u" (at 167.386 43.053 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 175.5902 45.72 0)
+    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 165.4302 45.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 174.625 41.91 0)
+    (property "Datasheet" "~" (at 164.465 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Manufacturer" "" (at 174.625 41.91 0)
+    (property "Manufacturer" "" (at 164.465 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "PartNo" "CL10A226MP8NUNE" (at 174.625 41.91 0)
+    (property "PartNo" "CL10A226MP8NUNE" (at 164.465 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "LCSC" "C60077" (at 174.625 41.91 0)
+    (property "LCSC" "C60077" (at 164.465 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "DNF" "" (at 174.625 41.91 0)
+    (property "DNF" "" (at 164.465 41.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 08d01d1e-202e-4e92-9cc2-ff82c09fdfeb))
@@ -9316,7 +9075,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C21") (unit 1) (value "22u") (footprint "Capacitor_SMD:C_0603_1608Metric")
+          (reference "C21") (unit 1)
         )
       )
     )
@@ -9341,7 +9100,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0125") (unit 1) (value "+3V3") (footprint "")
+          (reference "#PWR0125") (unit 1)
         )
       )
     )
@@ -9373,7 +9132,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C15") (unit 1) (value "4u7") (footprint "Capacitor_SMD:C_0603_1608Metric")
+          (reference "C15") (unit 1)
         )
       )
     )
@@ -9398,7 +9157,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0144") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0144") (unit 1)
         )
       )
     )
@@ -9430,32 +9189,32 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "C28") (unit 1) (value "1u") (footprint "Capacitor_SMD:C_0402_1005Metric")
+          (reference "C28") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:GND") (at 153.67 57.15 0) (mirror y) (unit 1)
+  (symbol (lib_id "power:GND") (at 151.13 53.34 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fafcace1-a9a3-4b8c-9e3c-0f03f1d04873)
-    (property "Reference" "#PWR0113" (at 153.67 63.5 0)
+    (property "Reference" "#PWR0113" (at 151.13 59.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 153.543 61.5442 0)
+    (property "Value" "GND" (at 151.003 57.7342 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 153.67 57.15 0)
+    (property "Footprint" "" (at 151.13 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 153.67 57.15 0)
+    (property "Datasheet" "" (at 151.13 53.34 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 0d03abe8-bc5c-4b85-85a7-054f464a2097))
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR0113") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR0113") (unit 1)
         )
       )
     )
@@ -9490,7 +9249,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "R3") (unit 1) (value "?") (footprint "Resistor_SMD:R_0402_1005Metric")
+          (reference "R3") (unit 1)
         )
       )
     )
@@ -9515,7 +9274,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "#PWR022") (unit 1) (value "GND") (footprint "")
+          (reference "#PWR022") (unit 1)
         )
       )
     )
@@ -9548,7 +9307,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "FID2") (unit 1) (value "Fiducial") (footprint "Fiducial:Fiducial_1mm_Mask2mm")
+          (reference "FID2") (unit 1)
         )
       )
     )
@@ -9583,7 +9342,7 @@
     (instances
       (project "sensor-epaper"
         (path "/8b915f44-d92b-4376-8a4d-f445b50a784a"
-          (reference "BT1") (unit 1) (value "Battery_Cell") (footprint "miceuz-lib:AA_KEYCO_53_SMD")
+          (reference "BT1") (unit 1)
         )
       )
     )
