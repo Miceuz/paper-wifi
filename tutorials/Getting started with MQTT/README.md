@@ -14,7 +14,7 @@ In the newly opened interface click **New Subscription**
 
 ![](Pasted%20image%2020230104153412.png)
 
-Enter ** as a topic name and click **Confirm**
+Enter *paper_wifi/test/#* as a topic name and click **Confirm**
 
 ![](Pasted%20image%2020230104153545.png)
 
