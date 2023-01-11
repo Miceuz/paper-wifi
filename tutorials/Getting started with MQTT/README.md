@@ -34,11 +34,11 @@ Specify settings outlined below to set up connection to the MQTT broker server.
 
 You can set up several widgets for your data that look like this:
 
-![](Screenshot_20230104_155244_MQTT Dash.jpg)
+![](Screenshot_20230104_155244_MQTT%20Dash.jpg)
 
 To set up a widget note the format of how it's specified:
 
-![](Screenshot_20230104_155355_MQTT Dash.jpg)
+![](Screenshot_20230104_155355_MQTT%20Dash.jpg)
 
 ## Configuring MQTT on your Paper wifi
 
