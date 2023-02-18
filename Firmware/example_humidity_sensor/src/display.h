@@ -5,6 +5,7 @@
 #include "wifi_config.h"
 
 // https://tchapi.github.io/Adafruit-GFX-Font-Customiser/
+// https://javl.github.io/image2cpp/
 
 void DisplayInit();
 void DisplayData(const SensorReadings &sensor_readings,
