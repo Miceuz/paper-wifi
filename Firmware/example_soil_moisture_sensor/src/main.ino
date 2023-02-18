@@ -6,6 +6,7 @@
 #include "mqtt.h"
 #include "sensor_readings.h"
 #include "wifi_config.h"
+#include "average.h"
 
 #define I2C_ENABLE 2
 #define SECOND 1000000
@@ -114,31 +115,13 @@ void SensorsPowerOn() {
 }
 
 SensorReadings SensorsRead() {
+  auto get_capacitance = [] { return sensor.getCapacitance(); };
+  auto get_temperature = [] { return sensor.getTemperature(); };
   SensorReadings sensor_readings;
   sensor_readings.batt_voltage_mv = analogReadMilliVolts(A3) * 2;
+  sensor_readings.moisture = Average<unsigned int>(get_capacitance);
+  sensor_readings.temperature = static_cast<float>(Average<int>(get_temperature)) / 10;
 
-  uint8_t averages_m = 0, averages_t = 0;
-  uint16_t m = 0, t = 0, d = 0;
-
-  for (uint8_t i = 0; i < 10; i++) {
-    d = sensor.getCapacitance();
-    if (d != 65535) {
-      m += d;
-      averages_m++;
-    }
-    d = sensor.getTemperature();
-    if (d != 65535) {
-      t += d;
-      averages_t++;
-    }
-  }
-  if (averages_m) {
-    sensor_readings.moisture = m / averages_m;
-  }
-
-  if (averages_t) {
-    sensor_readings.temperature = (float)(t / averages_t) / 10;
-  }
   Serial.println(String("Temperature: ") + sensor_readings.temperature);
   Serial.println(String("Moisture raw: ") + sensor_readings.moisture);
   Serial.println(String("Moisture percent: ") +
