@@ -46,7 +46,7 @@
         "silk_text_upright": false,
         "zones": {
           "45_degree_only": true,
-          "min_clearance": 0.0
+          "min_clearance": 0.19999999999999998
         }
       },
       "diff_pair_dimensions": [
@@ -77,7 +77,11 @@
         "silk_edge_clearance|170085000|74600000|9a78f01a-de1f-467e-8d9f-e6a0645db814|ccb798bc-765d-4dcc-82f2-705e6591c16c",
         "silk_edge_clearance|189500000|39025100|9a5f6f5a-9d56-4983-83e2-dd223289e3e6|c79dff6a-634d-4b6b-8113-ec92b0803332",
         "silk_edge_clearance|194029413|103130000|32466f1a-cd49-491f-9718-e8075aeda780|50d7d372-ef83-4891-b3e5-5a5070f5005d",
-        "solder_mask_bridge|181870000|109775000|5771b749-e474-4ddd-91a4-256d4db61fa8|55a963f9-c2df-4a73-a4b8-b0b69d85eb41"
+        "solder_mask_bridge|181870000|109775000|5771b749-e474-4ddd-91a4-256d4db61fa8|55a963f9-c2df-4a73-a4b8-b0b69d85eb41",
+        "unconnected_items|192000000|50125000|0fe81dad-6f1b-42a0-a0d2-fbeaca74ff1b|00d87c3f-dcb2-4f17-8f7e-c3d33a5a5664",
+        "zones_intersect|181100000|60200000|91a8f0f2-6b28-44bc-b05d-bdaaf2550e0a|b5d21efa-2543-4758-bad0-001d71b79366",
+        "zones_intersect|181100000|60200000|b5d21efa-2543-4758-bad0-001d71b79366|91a8f0f2-6b28-44bc-b05d-bdaaf2550e0a",
+        "zones_intersect|182000000|60200000|b5d21efa-2543-4758-bad0-001d71b79366|91a8f0f2-6b28-44bc-b05d-bdaaf2550e0a"
       ],
       "meta": {
         "version": 2
@@ -399,13 +403,14 @@
     "rule_severities": {
       "bus_definition_conflict": "error",
       "bus_entry_needed": "error",
-      "bus_label_syntax": "error",
       "bus_to_bus_conflict": "error",
       "bus_to_net_conflict": "error",
+      "conflicting_netclasses": "error",
       "different_unit_footprint": "error",
       "different_unit_net": "error",
       "duplicate_reference": "error",
       "duplicate_sheet_names": "error",
+      "endpoint_off_grid": "warning",
       "extra_units": "error",
       "global_label_dangling": "warning",
       "hier_label_mismatch": "error",
@@ -563,7 +568,9 @@
     "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_adjust_passive_values": false,
+    "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
+    "spice_model_current_sheet_as_root": true,
     "spice_save_all_currents": false,
     "spice_save_all_voltages": false,
     "subpart_first_id": 65,
