@@ -68,6 +68,6 @@ Lower on the same page you'll see MQTT patameters mentioned above:
 
 ![](Screenshot_20230104_152621_CaptivePortalLogin.jpg)
 
-Don't touch them for now as that's exactly what you have configured in your MQTT client. Click **Save** and wait for a few moments fot the board to connect to your WiFi, make measurements and send them via MQTT. You should be seeing values comming in MQTT client app. 
+Don't touch them for now as that's exactly what you have configured in your MQTT client. Click **Save** and wait for a few moments for the board to connect to your WiFi, make measurements and send them via MQTT. You should be seeing values comming in MQTT client app. 
 
 Note, that the board is configured to send measurements once in 5 minutes, also it won't send a measurement and update display if measurements didn't change from previous measurement.
