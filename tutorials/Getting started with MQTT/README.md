@@ -14,7 +14,7 @@ In the newly opened interface click **New Subscription**
 
 ![](Pasted%20image%2020230104153412.png)
 
-Enter ** as a topic name and click **Confirm**
+Enter *paper_wifi/test/#* as a topic name and click **Confirm**
 
 ![](Pasted%20image%2020230104153545.png)
 
@@ -34,11 +34,11 @@ Specify settings outlined below to set up connection to the MQTT broker server.
 
 You can set up several widgets for your data that look like this:
 
-![](Screenshot_20230104_155244_MQTT Dash.jpg)
+![](Screenshot_20230104_155244_MQTT%20Dash.jpg)
 
 To set up a widget note the format of how it's specified:
 
-![](Screenshot_20230104_155355_MQTT Dash.jpg)
+![](Screenshot_20230104_155355_MQTT%20Dash.jpg)
 
 ## Configuring MQTT on your Paper wifi
 
@@ -68,6 +68,6 @@ Lower on the same page you'll see MQTT patameters mentioned above:
 
 ![](Screenshot_20230104_152621_CaptivePortalLogin.jpg)
 
-Don't touch them for now as that's exactly what you have configured in your MQTT client. Click **Save** and wait for a few moments fot the board to connect to your WiFi, make measurements and send them via MQTT. You should be seeing values comming in MQTT client app. 
+Don't touch them for now as that's exactly what you have configured in your MQTT client. Click **Save** and wait for a few moments for the board to connect to your WiFi, make measurements and send them via MQTT. You should be seeing values comming in MQTT client app. 
 
 Note, that the board is configured to send measurements once in 5 minutes, also it won't send a measurement and update display if measurements didn't change from previous measurement.

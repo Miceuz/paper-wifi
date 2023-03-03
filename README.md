@@ -26,6 +26,11 @@ Wifi-enabled e-paper display for I2C sensors. Arduino compatible software on Pla
 
 Firmware build and upload process is managed by [Platformio](https://platformio.org). Most probably you will encounter the board in deep sleep in which it is not visible via USB. Jump GPIO9 to GND and reset the board to put it into bootloader mode. Run `pio run -t upload` to compile and upload firmware. Remove jumper and reset the board to run. If deep sleep is not used, board can be programmed without GPIO9 jumper.
 
+## MQTT backend infrastructure
+
+ * To quickly see your data piping in follow this guide: [Getting started with MQTT](https://github.com/Miceuz/paper-wifi/tree/main/tutorials/Getting%20started%20with%20MQTT)
+ * To setup your own backend for data storage and display follow this guide: [docker-compose-mosquitto-influxdb-telegraf-grafana](https://github.com/Miceuz/docker-compose-mosquitto-influxdb-telegraf-grafana)
+
 ## Licence
 
 [CERN Open Hardware Licence Version 2 - Strongly Reciprocal](https://ohwr.org/cern_ohl_s_v2.txt)
