@@ -2932,7 +2932,7 @@
     (model "${KICAD6_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz 0 0 -180))
     )
   )
 
@@ -6345,7 +6345,7 @@
   (dimension (type aligned) (layer "Cmts.User") (tstamp c2671a56-2b0b-4bb4-b6b7-8c1e82947bb5)
     (pts (xy 196 116.171573) (xy 196 37))
     (height 13)
-    (gr_text "79.1716 mm" (at 208.05 76.585787 90) (layer "Cmts.User") (tstamp c2671a56-2b0b-4bb4-b6b7-8c1e82947bb5)
+    (gr_text "79.1716 mm" (at 208.05 76.585786 90) (layer "Cmts.User") (tstamp c2671a56-2b0b-4bb4-b6b7-8c1e82947bb5)
       (effects (font (size 0.8 0.8) (thickness 0.15)))
     )
     (format (prefix "") (suffix "") (units 2) (units_format 1) (precision 4))
