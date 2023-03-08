@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <SensirionI2CSht4x.h>
 
 #include "WiFiManager.h"
@@ -25,6 +26,13 @@ RTC_DATA_ATTR bool is_first_run = true;
 
 String wifissidprefix = FPSTR("PAPER_WIFI_");
 String ssid;
+
+void SensorsInit();
+void SensorsPowerOn();
+SensorReadings SensorsRead();
+void SensorsPowerOff();
+void NetworkInit();
+void DeepSleep(uint32_t us);
 
 void setup() {
   Serial.begin(9600);
