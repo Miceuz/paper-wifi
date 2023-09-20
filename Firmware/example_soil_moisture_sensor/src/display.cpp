@@ -2,7 +2,8 @@
 
 // clang-format off
 #include <GxEPD.h>
-#include <GxGDEW0213T5D/GxGDEW0213T5D.h>  // 2.13" b/w 104x212 UC8151D
+#include <GxGDEY0213B74/GxGDEY0213B74.h>
+
 #include <GxIO/GxIO.h>
 #include <GxIO/GxIO_SPI/GxIO_SPI.h>
 #include <Fonts/FreeMonoBold12pt7b.h>

@@ -28,8 +28,14 @@ RTC_DATA_ATTR bool is_first_run = true;
 String wifissidprefix = FPSTR("PAPER_WIFI_");
 String ssid;
 
+void SensorsInit();
+void SensorsPowerOn();
+SensorReadings SensorsRead();
+void SensorsPowerOff();
+void NetworkInit();
+void DeepSleep(uint32_t us);
+
 void setup() {
-  delay(3000);
   Serial.begin(9600);
   Serial.println(String("Hello, is_first_run:") + is_first_run);
 
@@ -41,10 +47,9 @@ void setup() {
   }
   SensorsPowerOff();
 
-  DisplayInit();
-  NetworkInit();
-
   if (is_first_run || sensor_readings != new_readings) {
+    DisplayInit();
+    NetworkInit();
     DisplayData(new_readings, is_wifi_connected);
     Serial.println(String("is_wifi_configured:") + is_wifi_connected);
     if (is_wifi_connected) {
