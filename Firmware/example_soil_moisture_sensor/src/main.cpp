@@ -121,6 +121,7 @@ void SensorsInit() {
   digitalWrite(I2C_ENABLE, LOW);
 
   Wire.begin();
+  Wire.setClock(10000);
   sensor_readings.batt_voltage_mv = analogReadMilliVolts(A3) * 2;
 }
 
