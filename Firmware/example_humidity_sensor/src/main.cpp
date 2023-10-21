@@ -8,6 +8,8 @@
 #include "wifi_config.h"
 
 #define I2C_ENABLE 2
+#define IO0 0
+#define IO1 1
 #define SECOND 1000000
 #define MILLI_SECOND 1000
 
@@ -33,10 +35,16 @@ SensorReadings SensorsRead();
 void SensorsPowerOff();
 void NetworkInit();
 void DeepSleep(uint32_t us);
+void ConfigureButton();
 
 void setup() {
   Serial.begin(9600);
-  Serial.println(String("Hello, is_first_run:") + is_first_run);
+  ConfigureButton();
+  if (is_first_run) {
+    Serial.println(String("Hello, this is the first run after reset."));
+  } else {
+    Serial.println("Wakeup!");
+  }
 
   SensorsInit();
   SensorsPowerOn();
@@ -46,17 +54,21 @@ void setup() {
   }
   SensorsPowerOff();
 
-  DisplayInit();
-  NetworkInit();
-
   if (is_first_run || sensor_readings != new_readings) {
+    DisplayInit();
+    NetworkInit();
     DisplayData(new_readings, is_wifi_connected);
-    Serial.println(String("is_wifi_configured:") + is_wifi_connected);
     if (is_wifi_connected) {
+      Serial.println("Wifi is connected");
       MqttSetup();
       MqttPublish(new_readings);
     } else {
       Serial.println("Wifi not connected");
+      if(is_wifi_configured) {
+        Serial.println("Wifi is configured.");
+      } else {
+        Serial.println("Wifi is not configured.");
+      }
     }
     sensor_readings = new_readings;
   }
@@ -100,7 +112,7 @@ void NetworkInit() {
       }
     }
   }
-  Serial.println("Network ocnfig done");
+  Serial.println("Network config done");
 }
 
 void SensorsInit() {
@@ -147,6 +159,15 @@ void SensorsPowerOff() { digitalWrite(I2C_ENABLE, HIGH); }
 void DeepSleep(uint32_t us) {
   esp_sleep_enable_timer_wakeup(us);
   esp_deep_sleep_start();
+}
+
+void ButtonInterruptHandler() {
+  // nothing, just wake up
+}
+
+void ConfigureButton() {
+  pinMode(IO0, INPUT_PULLUP);
+  attachInterrupt(IO0, ButtonInterruptHandler, FALLING);
 }
 
 void loop() {}
