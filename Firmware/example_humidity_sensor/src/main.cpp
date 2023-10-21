@@ -8,7 +8,7 @@
 #include "wifi_config.h"
 
 #define I2C_ENABLE 2
-#define IO0 0
+#define WAKEUP_PIN 0
 #define IO1 1
 #define SECOND 1000000
 #define MILLI_SECOND 1000
@@ -157,6 +157,8 @@ SensorReadings SensorsRead() {
 void SensorsPowerOff() { digitalWrite(I2C_ENABLE, HIGH); }
 
 void DeepSleep(uint32_t us) {
+  esp_deep_sleep_enable_gpio_wakeup(1 << WAKEUP_PIN,
+                                    ESP_GPIO_WAKEUP_GPIO_LOW);
   esp_sleep_enable_timer_wakeup(us);
   esp_deep_sleep_start();
 }
@@ -166,8 +168,8 @@ void ButtonInterruptHandler() {
 }
 
 void ConfigureButton() {
-  pinMode(IO0, INPUT_PULLUP);
-  attachInterrupt(IO0, ButtonInterruptHandler, FALLING);
+  pinMode(WAKEUP_PIN, INPUT_PULLUP);
+  attachInterrupt(WAKEUP_PIN, ButtonInterruptHandler, FALLING);
 }
 
 void loop() {}
